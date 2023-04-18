@@ -1,0 +1,55 @@
+html, body{ 
+    height: 100%;
+    width: 100%;
+    background-color: #98a5ee;
+    color:rgb(64, 87, 104);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.header{ 
+    width: 100%;
+    margin: 0px auto;
+    background-color: rgb(181, 180, 204);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 0px 20px;
+}
+.navbar{
+    width: 60%;
+    padding: .8rem;
+}
+
+
+.nav-item{
+    display: inline;
+    width: 100px;
+    padding-top: 30px;
+    padding-left: 10%;
+   }
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+
+
+
+
+
+
+
+
+
+
