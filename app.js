@@ -15,20 +15,34 @@ var connection = mysql.createConnection({
     database: 'stacks_of_wax'
 });
 
-
+connection.connect();
 
 app.get('/', function (req, res) {
-    res.send("index.html")
+    res.render("index.html")
 });
 
-app.get('/data', function (req, res) {
-    connection.connect();
+app.get('/vinyls', function (req, res) {
     connection.query(`SELECT * FROM vinyl`, function (error, results, fields) {
         if (error) throw error;
         console.log('The solution is: ', results);
         res.send(results)
     });
-    connection.end();
+});
+
+app.get('/vinyl-collections', function (req, res) {
+    connection.query(`SELECT * FROM vinyl_collection`, function (error, results, fields) {
+        if (error) throw error;
+        console.log('The solution is: ', results);
+        res.send(results)
+    });
+});
+
+app.get('/vinyl-collection/:id', function (req, res) {
+    connection.query(`SELECT * FROM vinyl_collection WHERE vinyl_collection_id = '${req.params.id}'`, function (error, results, fields) {
+        if (error) throw error;
+        console.log('The solution is: ', results);
+        res.send(results)
+    });
 });
 
 app.listen(3000);
