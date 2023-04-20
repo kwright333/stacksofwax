@@ -60,18 +60,14 @@
         <%for (var i = 0; i < vinyls.length; i++) {    %>
             <% let vinylName = vinyls[i].album %>
             <% let artist = vinyls[i].artist %>
-            <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded" alt="<%= vinylName %>, <%= artist %>">
-        <% } %>
+        <div class="bg-image hover-overlay hover-zoom hover-shadow ripple">
+            <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="w-100 img-thumbnail rounded" />
+            <a href="<%= vinylName %>, <%= artist %>">
+              <div class="mask" style="background-color: hsla(0, 0%, 98%, 0.35)"></div>
+            </a>
+          </div>
+          <% } %>
         
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
     </div>
     
 </body>

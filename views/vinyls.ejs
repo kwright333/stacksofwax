@@ -52,27 +52,27 @@
         </div>
     </div>
     </span>
-    <div class="row main text-center padding">
-        <h1>Vinyls</h1>
-    </div>
 
-    <div class="text-center padding">
+    <div class="row main text-center padding">
+        <h1>Our Vinyls</h1>
+    </div>
+        <div class="team-grid">
+        <div class="container">
+            <div class="row albums d-flex justify-content-center">
         <%for (var i = 0; i < vinyls.length; i++) {    %>
             <% let vinylName = vinyls[i].album %>
             <% let artist = vinyls[i].artist %>
-            <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded" alt="<%= vinylName %>, <%= artist %>">
+            <div class="col-md-4 col-lg-3 item">
+            <div class="box" style="background-image:url(https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png)">
+                <div class="cover">
+                    <h4 class="album"><%= vinylName %></h4>
+                    <p class="artist"><%= artist %></p>
+                </div>
+                </div>
+                </div>
         <% } %>
-        
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded">
+        </div> 
+        </div> 
     </div>
-    
 </body>
 </html>

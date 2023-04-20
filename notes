@@ -1,5 +1,12 @@
 
+<%for (var i = 0; i < vinyls.length; i++) {    %>
+    <% let vinylName = vinyls[i].album %>
+    <% let artist = vinyls[i].artist %>
+    <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" class="img-thumbnail rounded" alt="<%= vinylName %>, <%= artist %>">
+<% } %>
 
+class="img-thumbnail rounded"
+<div class="d-flex flex-wrap justify-content-center"></div>
 
                
     
