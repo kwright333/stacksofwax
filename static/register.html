@@ -29,37 +29,57 @@
         <div class="row d-flex justify-content-center">
           <div class="col-lg-8">
             <h2 class="fw-bold mb-5">Sign up now</h2>
-            <form>
+            <form target="_blank" id="registerForm" action="/api/register" method="post" enctype="application/x-www-form-urlencoded">
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="form3Example1" class="form-control" />
-                    <label class="form-label" for="form3Example1">First name</label>
+                    <input type="text" name="firstName" id="firstName" class="form-control" form="registerForm" />
+                    <label class="form-label" for="firstName">First name</label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="form3Example2" class="form-control" />
-                    <label class="form-label" for="form3Example2">Last name</label>
+                    <input type="text" name="lastName" id="lastName" class="form-control" form="registerForm" />
+                    <label class="form-label" for="lastName">Last name</label>
                   </div>
                 </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="age" id="age" class="form-control" form="registerForm" />
+                    <label class="form-label" for="age">First name</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="text" name="gender" id="gender" class="form-control" form="registerForm" />
+                    <label class="form-label" for="gender">Last name</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="text" name="country" id="country" class="form-control" form="registerForm" />
+                <label class="form-label" for="country">Email address</label>
               </div>
   
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
-                <label class="form-label" for="form3Example3">Email address</label>
+                <input type="email" name="email" id="email" class="form-control" form="registerForm" />
+                <label class="form-label" for="email">Email address</label>
               </div>
   
               <!-- Password input -->
               <div class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
-                <label class="form-label" for="form3Example4">Password</label>
+                <input type="password" name="password" id="password" class="form-control" form="registerForm" />
+                <label class="form-label" for="password">Password</label>
               </div>
   
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
+              <button type="submit" class="btn btn-primary btn-block mb-4" onclick="window.location.href = 'login.html';">
                 Sign up
               </button>
               </form>
