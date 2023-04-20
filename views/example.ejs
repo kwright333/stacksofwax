@@ -1,0 +1,8 @@
+<ul>
+    <%for (var i = 0; i < vinyls.length; i++) {    %>
+        <% var vinylName = vinyls[i].album %>
+        <% var artist = vinyls[i].artist %>
+        <li><%= vinylName %></li>
+        <li><%= artist %></li>
+    <% } %>
+</ul>
