@@ -11,8 +11,8 @@ app.use(express.static("static"));
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'apples1!',
-    database: 'stacks_of_wax'
+    database: 'stacks_of_wax',
+    port: 3306
 });
 
 connection.connect();
