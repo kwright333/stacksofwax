@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 18, 2023 at 09:58 PM
+-- Generation Time: Apr 20, 2023 at 05:43 PM
 -- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.11
 
@@ -50,6 +50,13 @@ CREATE TABLE `members` (
   `country` varchar(255) NOT NULL,
   `gender` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `members`
+--
+
+INSERT INTO `members` (`member_id`, `first_name`, `last_name`, `age`, `email`, `password`, `country`, `gender`) VALUES
+(1, 'Sean', 'Kennedy', 28, 'sean@hotmail.co.uk', 'apples1!', 'UK', 'Male');
 
 -- --------------------------------------------------------
 
@@ -156,10 +163,35 @@ INSERT INTO `vinyl` (`vinyl_id`, `album`, `artist`, `year`, `genre`, `record_com
 CREATE TABLE `vinyl_collection` (
   `vinyl_collection_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
-  `vinyl_id` int(11) NOT NULL,
-  `collection_desc` text NOT NULL,
+  `description` text NOT NULL,
   `like_count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `vinyl_collection`
+--
+
+INSERT INTO `vinyl_collection` (`vinyl_collection_id`, `member_id`, `description`, `like_count`) VALUES
+(1, 1, 'Test Desc', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vinyl_collections_items`
+--
+
+CREATE TABLE `vinyl_collections_items` (
+  `vinyl_collection_id` int(11) NOT NULL,
+  `vinyl_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `vinyl_collections_items`
+--
+
+INSERT INTO `vinyl_collections_items` (`vinyl_collection_id`, `vinyl_id`) VALUES
+(1, 19),
+(1, 47);
 
 --
 -- Indexes for dumped tables
@@ -199,8 +231,14 @@ ALTER TABLE `vinyl`
 --
 ALTER TABLE `vinyl_collection`
   ADD PRIMARY KEY (`vinyl_collection_id`),
-  ADD KEY `FK_member_id_vinyl_collection` (`member_id`),
-  ADD KEY `FK_vinyl_id_vinyl_collection` (`vinyl_id`);
+  ADD KEY `fk_member_id_members` (`member_id`);
+
+--
+-- Indexes for table `vinyl_collections_items`
+--
+ALTER TABLE `vinyl_collections_items`
+  ADD PRIMARY KEY (`vinyl_collection_id`,`vinyl_id`),
+  ADD KEY `fk_vinyl_id_vinyl` (`vinyl_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -216,7 +254,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rating`
@@ -234,7 +272,13 @@ ALTER TABLE `vinyl`
 -- AUTO_INCREMENT for table `vinyl_collection`
 --
 ALTER TABLE `vinyl_collection`
-  MODIFY `vinyl_collection_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `vinyl_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `vinyl_collections_items`
+--
+ALTER TABLE `vinyl_collections_items`
+  MODIFY `vinyl_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -259,8 +303,14 @@ ALTER TABLE `rating`
 -- Constraints for table `vinyl_collection`
 --
 ALTER TABLE `vinyl_collection`
-  ADD CONSTRAINT `FK_member_id_vinyl_collection` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`),
-  ADD CONSTRAINT `FK_vinyl_id_vinyl_collection` FOREIGN KEY (`vinyl_id`) REFERENCES `vinyl` (`vinyl_id`);
+  ADD CONSTRAINT `fk_member_id_members` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`);
+
+--
+-- Constraints for table `vinyl_collections_items`
+--
+ALTER TABLE `vinyl_collections_items`
+  ADD CONSTRAINT `fk_vinyl_collection_id_vinyl_collections` FOREIGN KEY (`vinyl_collection_id`) REFERENCES `vinyl_collection` (`vinyl_collection_id`),
+  ADD CONSTRAINT `fk_vinyl_id_vinyl` FOREIGN KEY (`vinyl_id`) REFERENCES `vinyl` (`vinyl_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
