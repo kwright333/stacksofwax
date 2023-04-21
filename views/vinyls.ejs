@@ -24,13 +24,13 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a href="vinyls.html" class="btn btn-outline-light" role="button">Vinyls</a>
+                            <a href="vinyls" class="btn btn-outline-light" role="button">Vinyls</a>
                         </li>
                         <li class="nav-item">
                             <a href="collections.html" class="btn btn-outline-light" role="button">Collections</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="btn btn-outline-light" role="button">Option 3</a>
+                            <a href="members.html" class="btn btn-outline-light" role="button">Members</a>
                         </li>
                     </ul>
                 </div>
@@ -62,8 +62,9 @@
         <%for (var i = 0; i < vinyls.length; i++) {    %>
             <% let vinylName = vinyls[i].album %>
             <% let artist = vinyls[i].artist %>
+            <% let art = vinyls[i].album_art %>
             <div class="col-md-4 col-lg-3 item">
-            <div class="box" style="background-image:url(https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png)">
+            <div class="box" style="background-image:url(<%= art %>)">
                 <div class="cover">
                     <h4 class="album"><%= vinylName %></h4>
                     <p class="artist"><%= artist %></p>
