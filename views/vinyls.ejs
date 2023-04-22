@@ -1,79 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/gui.css">
-    <script src="https://kit.fontawesome.com/d1738f8474.js" crossorigin="anonymous"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="assets/gui.css" />
+    <script
+      src="https://kit.fontawesome.com/d1738f8474.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <title>Vinyls</title>
-</head>
-<body>
-     <!-- Header -->
-     <span class="border">
-    <div class="header sticky-top">
+  </head>
+  <body>
+    <!-- Header -->
+    <span class="border">
+      <div class="header sticky-top">
         <nav class="navbar navbar-expand-md">
-            <div class="container-fluid">
-                <a class="navbar-logo" href="index.html">
-                    <img src="assets/SOW_Logo.png" style="width: 3cm; height:2cm;">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="vinyls" class="btn btn-outline-light" role="button">Vinyls</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="collections.html" class="btn btn-outline-light" role="button">Collections</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="members.html" class="btn btn-outline-light" role="button">Members</a>
-                        </li>
-                    </ul>
-                </div>
+          <div class="container-fluid">
+            <a class="navbar-logo" href="index.html">
+              <img src="assets/SOW_Logo.png" style="width: 3cm; height: 2cm" />
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarResponsive"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a href="vinyls" class="btn btn-outline-light" role="button"
+                    >Vinyls</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="collections.html"
+                    class="btn btn-outline-light"
+                    role="button"
+                    >Collections</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="members.html"
+                    class="btn btn-outline-light"
+                    role="button"
+                    >Members</a
+                  >
+                </li>
+              </ul>
             </div>
+          </div>
         </nav>
         <div class="container-fluid col-2">
-            <a href="login.html" class="btn btn-outline-light" role="button">Login/Register</a>
-            <i class="fa fa-light fa-user" style="color: #484f5b;"></i>
+          <a href="login.html" class="btn btn-outline-light" role="button"
+            >Login/Register</a
+          >
+          <i class="fa fa-light fa-user" style="color: #484f5b"></i>
         </div>
 
         <div class="container-fluid col-2">
-            <div class="input-group rounded">
-                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                    aria-describedby="search-addon" />
-                <span class="input-group-text border-0" id="search-addon">
-                    <i class="fas fa-magnifying-glass"></i>
-                </span>
-            </div>
+          <div class="input-group rounded">
+            <input
+              type="search"
+              class="form-control rounded"
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="search-addon"
+            />
+            <span class="input-group-text border-0" id="search-addon">
+              <i class="fas fa-magnifying-glass"></i>
+            </span>
+          </div>
         </div>
-    </div>
+      </div>
     </span>
 
     <div class="row main text-center padding">
-        <h1>Our Vinyls</h1>
+      <h1>Our Vinyls</h1>
     </div>
-        <div class="team-grid">
-        <div class="container">
-            <div class="row albums d-flex justify-content-center">
-        <%for (var i = 0; i < vinyls.length; i++) {    %>
-            <% let vinylName = vinyls[i].album %>
-            <% let artist = vinyls[i].artist %>
+    <div class="team-grid">
+      <div class="container">
+        <div class="row albums d-flex justify-content-center">
+          <%for (var i = 0; i < vinyls.length; i++) { %> 
+            <% let vinylName = vinyls[i].album %> 
+            <% let artist = vinyls[i].artist %> 
             <% let art = vinyls[i].album_art %>
-            <div class="col-md-4 col-lg-3 item">
-            <div class="box" style="background-image:url(<%= art %>)">
+            <% let modalNum = vinyls[i].vinyl_id %>
+            <% let tracklist = vinyls[i].tracklist %>
+            <% let genre = vinyls[i].genre %>
+            <% let year = vinyls[i].year %>
+            <% let recordCompany = vinyls[i].record_company %>
+            <% let likeCount = vinyls[i].like_count %>
+          <div class="col-md-4 col-lg-3 item">
+            <div class="box" style="background-image: url(<%= art %>)">
+              <a
+                href="#!"
+                data-bs-toggle="modal"
+                data-bs-target="#<%= modalNum %>"
+                onclick="showAlbumModal"
+              >
                 <div class="cover">
-                    <h4 class="album"><%= vinylName %></h4>
-                    <p class="artist"><%= artist %></p>
+                  <h4 class="album"><%= vinylName %></h4>
+                  <p class="artist"><%= artist %></p>
                 </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="<%= modalNum %>"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    <%= vinylName %>
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
                 </div>
+                <div class="modal-body">
+                   <p>
+                    <h5>Track List</h5>
+                    <%= tracklist %>
+                   </p> 
+                   <p>
+                    <h5>Year</h5>
+                    <%= year %>
+                   </p>
+                   <p>
+                    <h5>Genre</h5>
+                    <%= genre %>
+                   </p>
+                   <p>
+                    <h5>Record Company</h5>
+                    <%= recordCompany %>
+                   </p>
+                   <p>
+                    <h5>Likes</h5>
+                    <%= likeCount %>
+                   </p>
                 </div>
-        <% } %>
-        </div> 
-        </div> 
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button class="btn btn-block btn-primary"><i class="fa fa-thumbs-up"></i> Like</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
