@@ -26,6 +26,10 @@ body{
     padding-left: 10%;
    }
 
+.videos{
+  width: 100%;
+}
+
 .divider:after,
 .divider:before {
 content: "";
@@ -41,9 +45,6 @@ height: calc(100% - 73px);
 height: 100%;
 }
 }
-
-
-
 
 .albums {
 padding:50px 0;
