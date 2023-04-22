@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "watch": {
-    "start": "app.js"
+    "start": {
+      "patterns": ["app.js", "api/*.js", "db/*.js"]
+    }
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
