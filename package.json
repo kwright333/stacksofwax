@@ -5,7 +5,11 @@
   "main": "index.js",
   "watch": {
     "start": {
-      "patterns": ["app.js", "api/*.js", "db/*.js"]
+      "patterns": [
+        "app.js",
+        "api/*.js",
+        "db/*.js"
+      ]
     }
   },
   "scripts": {
@@ -28,6 +32,8 @@
     "body-parser": "^1.20.2",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-mysql-session": "^3.0.0",
+    "express-session": "^1.17.3",
     "mysql": "^2.18.1",
     "npm-watch": "^0.11.0"
   }
