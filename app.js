@@ -18,9 +18,8 @@ app.set('view engine', 'ejs')
 //////////////////////////////////////////////////////
 
 // Creates a route that renders static/index.ejs
-app.get('/', async function (req, res) {
-    res.render("index.ejs")
-});
+app.get('/', vinyls.getHomePage);
+    
 
 // Creates a route that renders views/vinyls.ejs
 app.get('/vinyls', vinyls.getVinylsPage);
