@@ -17,9 +17,9 @@ app.set('view engine', 'ejs')
 //                 Web Pages Routes                 //
 //////////////////////////////////////////////////////
 
-// Creates a route that renders static/index.html
+// Creates a route that renders static/index.ejs
 app.get('/', async function (req, res) {
-    res.render("index.html")
+    res.render("index.ejs")
 });
 
 // Creates a route that renders views/vinyls.ejs
@@ -53,17 +53,6 @@ router.post('/register', member.registerNewMember);
 router.post('/login', member.login);
 
 app.use('/api', router);
-
-function error(err, req, res, next) {
-    // log it
-    if (!test) console.error(err.stack);
-
-    // respond with 500 "Internal Server Error".
-    res.status(500);
-    res.send('Internal Server Error');
-}
-
-app.use(error);
 
 app.listen(3000);
 
