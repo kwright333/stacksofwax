@@ -35,10 +35,11 @@ function checkLogin(req, res, next) {
 
 // Creates a route that renders static/index.ejs
 app.get('/', vinyls.getHomePage);
-    
 
 // Creates a route that renders views/vinyls.ejs
 app.get('/vinyls', vinyls.getVinylsPage);
+app.get('/members/:id', member.renderMemberDetails)
+
 
 //////////////////////////////////////////////////////
 //                API Routes                        //

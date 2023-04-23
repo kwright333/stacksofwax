@@ -5,7 +5,13 @@ exports.getVinylsPage = async function (req, res) {
     const vinyls = await db.executeQuery(`SELECT * FROM vinyl`);
     const genres = await db.executeQuery(`SELECT DISTINCT genre FROM vinyl`);
     const artists = await db.executeQuery(`SELECT DISTINCT artist FROM vinyl`);
-    res.render("vinyls.ejs", { vinyls, genres, artists } )
+
+    let memberId = null;
+    if (req.session.memberId) {
+        memberId = req.session.memberId;
+    }
+    
+    res.render("vinyls.ejs", { vinyls, genres, artists, memberId } )
 }
 
 exports.getAllVinyls = async function (req, res) {
@@ -54,7 +60,12 @@ exports.renderVinylsByLeastLiked = async function (req, res) {
 exports.getHomePage = async function (req, res) {
     const vinyls = await db.executeQuery(`SELECT * FROM vinyl`);
     const topVinyls = await db.executeQuery(`SELECT * FROM vinyl ORDER BY like_count DESC LIMIT 9`);
-    res.render("index.ejs", { vinyls, topVinyls } )
+    let memberId = null;
+    if (req.session.memberId) {
+        memberId = req.session.memberId;
+    }
+
+    res.render("index.ejs", { vinyls, topVinyls, memberId } )
 }
 
 exports.likeVinyl = async function (req, res) {

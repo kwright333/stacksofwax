@@ -28,6 +28,8 @@ exports.login = async function (req, res) {
 
     if (result.length === 1) {
         req.session.loggedIn = true;
+        req.session.memberId = result[0].member_id;
+
 
         res.redirect("/");
     } else {
@@ -44,4 +46,13 @@ exports.getMemberDetails = async function (req, res) {
     const result = await db.executeQuery(`SELECT member_id, first_name, last_name, age, email, country, gender FROM members WHERE member_id = ${req.params.id}`);
 
     res.send(result);
+}
+
+exports.renderMemberDetails = async function (req, res) {
+    if (!req.session.loggedIn) {
+        res.redirect('login.html');
+    }
+
+    const memberDetails = await db.executeQuery(`SELECT member_id, first_name, last_name, age, email, country, gender FROM members WHERE member_id = ${req.params.id}`);
+    res.render("members.ejs", { memberDetails: memberDetails[0] } );
 }

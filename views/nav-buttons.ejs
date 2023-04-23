@@ -1,0 +1,13 @@
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a href="vinyls" class="btn btn-outline-light" role="button">Vinyls</a>
+    </li>
+    <li class="nav-item">
+        <a href="collections.html" class="btn btn-outline-light" role="button">Collections</a>
+    </li>
+    <% if (memberId !== null) { %>
+    <li class="nav-item">
+        <a href="members/<%= memberId %>" class="btn btn-outline-light" role="button">Members</a>
+    </li>
+    <% } %>
+</ul>

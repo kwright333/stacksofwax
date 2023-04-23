@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets/gui.css">
+    <link rel="stylesheet" href="/assets/gui.css">
     <script src="https://kit.fontawesome.com/d1738f8474.js" crossorigin="anonymous"></script>
-    <script src="index.js"></script>
+    <script src="/index.js"></script>
     <title>Members</title>
 </head>
 <body>
@@ -19,23 +19,13 @@
             <nav class="navbar navbar-expand-md">
                 <div class="container-fluid">
                     <a class="navbar-logo" href="/">
-                        <img src="assets/SOW_Logo.png" style="width: 3cm; height:2cm;">
+                        <img src="/assets/SOW_Logo.png" style="width: 3cm; height:2cm;">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a href="vinyls" class="btn btn-outline-light" role="button">Vinyls</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="collections.html" class="btn btn-outline-light" role="button">Collections</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="members.html" class="btn btn-outline-light" role="button">Members</a>
-                            </li>
-                        </ul>
+                        <%- include('./nav-buttons', { memberId: memberDetails.member_id }) %>
                     </div>
                 </div>
             </nav>
@@ -61,10 +51,10 @@
                 <div class="col-6">
                     <h2>My Details</h2>
                     <br>
-                    <p>Name : First Last</p>
-                    <p>Age : age</p>
-                    <p>Country : country</p>   
-                    <p>Gender : gender</p>    
+                    <p>Name : <%= memberDetails.first_name %> <%= memberDetails.last_name %></p>
+                    <p>Age : <%= memberDetails.age %></p>
+                    <p>Country : <%= memberDetails.country %></p>   
+                    <p>Gender : <%= memberDetails.gender %></p>    
                         
                       
                 </div>
