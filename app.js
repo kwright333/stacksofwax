@@ -39,6 +39,7 @@ app.get('/', vinyls.getHomePage);
 // Creates a route that renders views/vinyls.ejs
 app.get('/vinyls', vinyls.getVinylsPage);
 app.get('/members/:id', member.renderMemberDetails)
+app.get('/collections', vinylCollections.renderVinylCollectionsPage)
 
 
 //////////////////////////////////////////////////////

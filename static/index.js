@@ -43,3 +43,10 @@ async function orderVinylsByLeastLiked() {
 
     document.getElementById("vinyls-list").innerHTML = html;
 }
+
+async function addVinylCollection() {
+    const response = await fetch(`api/vinyls/leastLiked`);
+    const html = await response.text();
+
+    document.getElementById("vinyls-list").innerHTML = html;
+}

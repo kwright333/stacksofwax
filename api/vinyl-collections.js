@@ -55,3 +55,14 @@ exports.likeVinylCollection = async function (req, res) {
         success: true
     });
 }
+
+exports.renderVinylCollectionsPage = async function (req, res) {
+    const vinylCollections = await db.executeQuery(`SELECT * FROM vinyl_collection`);
+
+    let memberId = null;
+    if (req.session.memberId) {
+        memberId = req.session.memberId;
+    }
+    
+    res.render("collections.ejs", { vinylCollections, memberId } );
+}

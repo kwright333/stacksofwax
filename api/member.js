@@ -54,5 +54,6 @@ exports.renderMemberDetails = async function (req, res) {
     }
 
     const memberDetails = await db.executeQuery(`SELECT member_id, first_name, last_name, age, email, country, gender FROM members WHERE member_id = ${req.params.id}`);
-    res.render("members.ejs", { memberDetails: memberDetails[0] } );
+    const vinylCollections = await db.executeQuery(`SELECT * FROM vinyl_collection WHERE member_id = '${req.params.id}'`);
+    res.render("members.ejs", { memberDetails: memberDetails[0], vinylCollections } );
 }
