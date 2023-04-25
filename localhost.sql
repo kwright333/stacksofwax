@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 24, 2023 at 08:45 PM
+-- Generation Time: Apr 25, 2023 at 06:27 PM
 -- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.11
 
@@ -90,7 +90,8 @@ INSERT INTO `rating` (`rating_id`, `member_id`, `vinyl_id`, `vinyl_collection_id
 (14, 1, 5, NULL),
 (15, 1, 5, NULL),
 (16, 1, 5, NULL),
-(17, 1, 5, NULL);
+(17, 1, 5, NULL),
+(18, 1, NULL, 17);
 
 -- --------------------------------------------------------
 
@@ -109,8 +110,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('2UUeIGAfBYRUccRDmEg2pnn0v_5VX09W', 1682373120, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"loggedIn\":true,\"memberId\":1}'),
-('2d1MKsAiU617skzo6g6j1KWKFyBxfZCx', 1682451719, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"loggedIn\":true,\"memberId\":1}');
+('2d1MKsAiU617skzo6g6j1KWKFyBxfZCx', 1682465260, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"loggedIn\":true,\"memberId\":1}');
 
 -- --------------------------------------------------------
 
@@ -218,7 +218,22 @@ CREATE TABLE `vinyl_collection` (
 
 INSERT INTO `vinyl_collection` (`vinyl_collection_id`, `member_id`, `vinyl_collection_name`, `description`, `like_count`) VALUES
 (1, 1, 'collection 1', 'Test Desc', 4),
-(2, 1, 'collection 2', 'asdasdzxzxc', 2);
+(2, 1, 'collection 2', 'asdasdzxzxc', 2),
+(3, 1, 'asdasd', 'asdasd', 0),
+(4, 1, 'asdasd', 'asdasd', 0),
+(5, 1, 'asdasd', 'asdasd', 0),
+(6, 1, 'asdasd', 'asdasd', 0),
+(7, 1, 'asdasd', 'asdasd', 0),
+(8, 1, 'asdasd', 'asdasd', 0),
+(9, 1, 'asdasd', 'asdasd', 0),
+(10, 1, 'asdasd', 'asdasd', 0),
+(11, 1, 'test', 'testdesc', 0),
+(12, 1, 'testdesc', 'asdasd', 0),
+(13, 1, 'asdasd', 'asdsdf', 0),
+(14, 1, 'sean', 'eeewww', 0),
+(15, 1, 'qqq', 'qwwq', 0),
+(16, 1, 'qq', 'wqwq', 0),
+(17, 1, 'xdfgbh', 'sdfg', 3);
 
 -- --------------------------------------------------------
 
@@ -237,7 +252,24 @@ CREATE TABLE `vinyl_collections_items` (
 
 INSERT INTO `vinyl_collections_items` (`vinyl_collection_id`, `vinyl_id`) VALUES
 (1, 19),
-(1, 47);
+(1, 47),
+(6, 5),
+(7, 5),
+(7, 7),
+(8, 5),
+(8, 7),
+(9, 5),
+(9, 7),
+(10, 11),
+(12, 7),
+(14, 12),
+(14, 14),
+(15, 6),
+(15, 9),
+(16, 11),
+(16, 12),
+(17, 7),
+(17, 8);
 
 --
 -- Indexes for dumped tables
@@ -312,7 +344,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `vinyl`
@@ -324,13 +356,13 @@ ALTER TABLE `vinyl`
 -- AUTO_INCREMENT for table `vinyl_collection`
 --
 ALTER TABLE `vinyl_collection`
-  MODIFY `vinyl_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `vinyl_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `vinyl_collections_items`
 --
 ALTER TABLE `vinyl_collections_items`
-  MODIFY `vinyl_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `vinyl_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
