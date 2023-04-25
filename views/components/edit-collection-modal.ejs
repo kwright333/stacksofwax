@@ -21,20 +21,21 @@
 
         <p>
           <label>Vinyls</label>
-          <select id="vinyl-selection-<%= collectionId %>" data-collection-id="<%= collectionId %>">
+          <select id="vinyl-selection-<%= collectionId %>" data-collection-id="<%= collectionId %>" onchange="addToVinylList(this.value)">
+            <option selected value> -- select an option -- </option>
             <%for (var i = 0; i < vinyls.length; i++) { %>
-              <% if (!selectedVinyls.some(selectedVinyl => selectedVinyl.vinylId == vinyls[i].vinyl_id)) {%>
-                <option id="vinyl-option-<%= vinyls[i].vinyl_id %>" onclick="addToVinylList('<%= vinyls[i].vinyl_id %>', '<%= vinyls[i].album %>', '<%= collectionId %>')"><%= vinyls[i].album %></option>
-              <% } %>
+            <% if (!selectedVinyls.some(selectedVinyl => selectedVinyl.vinylId == vinyls[i].vinyl_id)) {%>
+            <option id="vinyl-option-<%= vinyls[i].vinyl_id %>" value='{ "vinylId": "<%= vinyls[i].vinyl_id %>", "album": "<%= vinyls[i].album %>", "collectionId": "<%= collectionId %>"}'><%= vinyls[i].album %></option>
+            <% } %>
             <% } %>
           </select>
         </p>
 
         <p>
         <ul id="vinyl-list-<%= collectionId %>" data-collection-id="<%= collectionId %>">
-        <%for (var i = 0; i < selectedVinyls.length; i++) { %>
+          <%for (var i = 0; i < selectedVinyls.length; i++) { %>
           <li data-vinyl-id="<%= selectedVinyls[i].vinylId %>" data-album="<%= selectedVinyls[i].album %>" id="vinyl-selected-<%= selectedVinyls[i].vinylId %>"><%= selectedVinyls[i].album %> <i onclick="removeFromVinylList('<%= selectedVinyls[i].vinylId %>', '<%= collectionId %>')" class="fa fa-thin fa-delete-left" style="color: #40454f;"></i></li>
-        <% } %>
+          <% } %>
         </ul>
         </p>
       </div>

@@ -52,7 +52,9 @@ async function orderVinylsByLeastLiked() {
 let selectedVinylsHtml = {};
 let selectedVinyls = [];
 
-function addToVinylList(vinylId, album, collectionId) {
+function addToVinylList(value) {
+    const { vinylId, album, collectionId } = JSON.parse(value);
+
     console.log(vinylId);
     const vinylList = document.getElementById(`vinyl-list-${collectionId}`);
     vinylList.innerHTML += `<li data-vinyl-id="${vinylId}" data-album="${album}" id="vinyl-selected-${vinylId}">${album} <i onclick="removeFromVinylList('${vinylId}', '${collectionId}')" class="fa fa-thin fa-delete-left" style="color: #40454f;"></i></li>`
