@@ -60,12 +60,14 @@ exports.renderVinylsByLeastLiked = async function (req, res) {
 exports.getHomePage = async function (req, res) {
     const vinyls = await db.executeQuery(`SELECT * FROM vinyl`);
     const topVinyls = await db.executeQuery(`SELECT * FROM vinyl ORDER BY like_count DESC LIMIT 9`);
+    const topVinylCollections = await db.executeQuery(`SELECT * FROM vinyl_collection ORDER BY like_count DESC LIMIT 3`);
+
     let memberId = null;
     if (req.session.memberId) {
         memberId = req.session.memberId;
     }
 
-    res.render("index.ejs", { vinyls, topVinyls, memberId } )
+    res.render("index.ejs", { vinyls, topVinyls, memberId, topVinylCollections } )
 }
 
 exports.likeVinyl = async function (req, res) {

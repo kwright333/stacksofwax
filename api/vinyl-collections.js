@@ -12,7 +12,7 @@ exports.getVinylCollectionById = async function (req, res) {
 }
 
 exports.getTopRatedVinylCollections = async function (req, res) {
-    const results = await db.executeQuery(`SELECT * FROM vinyl_collection ORDER BY like_count DESC LIMIT 9`);
+    const results = await db.executeQuery(`SELECT * FROM vinyl_collection ORDER BY like_count DESC LIMIT 3`);
     res.send(results);
 }
 
@@ -100,14 +100,27 @@ exports.likeVinylCollection = async function (req, res) {
 }
 
 exports.renderVinylCollectionsPage = async function (req, res) {
-    const vinylCollections = await db.executeQuery(`SELECT * FROM vinyl_collection ORDER BY vinyl_collection_id DESC`);
+    const vinylCollectionsResults = await db.executeQuery(`SELECT * FROM vinyl_collection ORDER BY vinyl_collection_id DESC`);
+    const vinyls = await db.executeQuery(`SELECT vinyl_id, album, album_art FROM vinyl`);
+    
+    const vinylCollectionsPromises = await vinylCollectionsResults.map(async function(vinylCollection) {
+        const vinylListResults = await db.executeQuery(`SELECT vinyl_id FROM vinyl_collections_items WHERE vinyl_collection_id = ${vinylCollection.vinyl_collection_id}`);
+        const collectionComments = await db.executeQuery(`SELECT comment_id, comment, first_name, last_name, vinyl_collection_id FROM comments JOIN members ON members.member_id = comments.member_id WHERE vinyl_collection_id = ${vinylCollection.vinyl_collection_id}`);
+
+        return {
+            ...vinylCollection,
+            vinylList: vinyls.filter(x => vinylListResults.find(y => y.vinyl_id == x.vinyl_id) != undefined).map(vinyl => ({ vinylId: vinyl.vinyl_id, album: vinyl.album, art: vinyl.album_art })),
+            collectionComments
+        }
+    });
+    const vinylCollections = await Promise.all(vinylCollectionsPromises);
 
     let memberId = null;
     if (req.session.memberId) {
         memberId = req.session.memberId;
     }
     
-    res.render("collections.ejs", { vinylCollections, memberId, showEdit: false } );
+    res.render("collections.ejs", { vinylCollections, memberId, showEdit: false, vinyls } );
 }
 
 exports.renderVinylCollectionsForMember = async function (req, res) {
