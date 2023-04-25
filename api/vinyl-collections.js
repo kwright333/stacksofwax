@@ -32,6 +32,23 @@ exports.createVinylCollection = async function (req, res) {
     });
 }
 
+exports.updateVinylCollection = async function (req, res) {
+    let memberId = null;
+    if (req.session.memberId) {
+        memberId = req.session.memberId;
+    }
+
+    const results = await db.executeQuery(`UPDATE vinyl_collection SET vinyl_collection_name = ${mysql.escape(req.body.collectionName)}, description = ${mysql.escape(req.body.description)} WHERE vinyl_collection_id = ${req.body.collectionId}`);
+
+    const vinylInserts = req.body.vinylIds.map(vinylId => `(${req.body.collectionId}, ${vinylId})`).join(',');
+
+    await db.executeQuery(`DELETE FROM vinyl_collections_items WHERE vinyl_collection_id = ${req.body.collectionId}`);
+    const insertResult = await db.executeQuery(`INSERT INTO vinyl_collections_items VALUES ${vinylInserts}`);
+    res.send({
+        success: true
+    });
+}
+
 exports.createVinylCollectionComment = async function (req, res) {
     const results = await db.executeQuery(`INSERT INTO comments VALUES (null, ${mysql.escape(req.body.comment)}, ${req.body.memberId}, ${req.body.vinylCollectionId})`);
     res.send(results);

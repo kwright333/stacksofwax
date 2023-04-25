@@ -71,6 +71,7 @@ router.get(`/${resourceName}`, vinylCollections.getAllVinylCollections);
 router.get(`/${resourceName}/top-rated`, vinylCollections.getTopRatedVinylCollections);
 router.get(`/${resourceName}/:id/comments`, vinylCollections.getVinylCollectionComments);
 router.post(`/${resourceName}`, vinylCollections.createVinylCollection);
+router.put(`/${resourceName}`, vinylCollections.updateVinylCollection);
 router.post(`/${resourceName}/:id/comment`, vinylCollections.createVinylCollectionComment);
 router.post(`/${resourceName}/:id/items`, vinylCollections.addVinylsToCollection);
 router.delete(`/${resourceName}/:id/items`, vinylCollections.removeVinylsFromCollection);

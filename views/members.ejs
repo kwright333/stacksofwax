@@ -65,7 +65,7 @@
       </div>
       <div class="col-6">
         <h2>My Collections</h2>
-        <%- include('./components/member-vinyl-collections', { vinylCollections, showEdit }) %>
+        <%- include('./components/member-vinyl-collections', { vinylCollections, showEdit, vinyls }) %>
       </div>
     </div>
   </div>
@@ -93,15 +93,15 @@
           
           <p>
             <label>Vinyls</label>
-            <select name="vinyl-selection" id="vinyl-selection">
+            <select name="vinyl-selection-0" id="vinyl-selection">
               <%for (var i = 0; i < vinyls.length; i++) { %> 
-                <option id="vinyl-option-<%= vinyls[i].vinyl_id %>" onclick="addToVinylList('<%= vinyls[i].vinyl_id %>', '<%= vinyls[i].album %>')"><%= vinyls[i].album %></option>
+                <option id="vinyl-option-<%= vinyls[i].vinyl_id %>" onclick="addToVinylList('<%= vinyls[i].vinyl_id %>', '<%= vinyls[i].album %>', '0')"><%= vinyls[i].album %></option>
               <% } %>
             </select>
           </p>
           
           <p>
-            <ul id="vinyl-list" >
+            <ul id="vinyl-list-0" >
 
             </ul>
           </p>
