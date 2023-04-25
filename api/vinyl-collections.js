@@ -16,6 +16,13 @@ exports.getTopRatedVinylCollections = async function (req, res) {
     res.send(results);
 }
 
+exports.createVinylCollection = async function (req, res) {
+    const results = await db.executeQuery(`INSERT INTO vinyl-collection VALUES (null, ${req.body.memberId}, ${req.body.collectionName}, ${req.body.description}, 0)`);
+    res.send({
+        success: true
+    });
+}
+
 exports.createVinylCollectionComment = async function (req, res) {
     const results = await db.executeQuery(`INSERT INTO comments VALUES (null, ${mysql.escape(req.body.comment)}, ${req.body.memberId}, ${req.body.vinylCollectionId})`);
     res.send(results);
@@ -63,6 +70,19 @@ exports.renderVinylCollectionsPage = async function (req, res) {
     if (req.session.memberId) {
         memberId = req.session.memberId;
     }
+    
+    res.render("collections.ejs", { vinylCollections, memberId } );
+}
+
+exports.renderVinylCollectionsForMember = async function (req, res) {
+    const vinylCollections = await db.executeQuery(`SELECT * FROM vinyl_collection WHERE member_id = '${req.params.id}'`);
+
+    let memberId = null;
+    if (req.session.memberId) {
+        memberId = req.session.memberId;
+    }
+
+    await ejs.renderFile('views/member-vinyl-collections.ejs', { vinylCollections });
     
     res.render("collections.ejs", { vinylCollections, memberId } );
 }

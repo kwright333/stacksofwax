@@ -70,6 +70,7 @@ const resourceName = "vinyl-collections";
 router.get(`/${resourceName}`, vinylCollections.getAllVinylCollections);
 router.get(`/${resourceName}/top-rated`, vinylCollections.getTopRatedVinylCollections);
 router.get(`/${resourceName}/:id/comments`, vinylCollections.getVinylCollectionComments);
+router.post(`/${resourceName}`, vinylCollections.createVinylCollection);
 router.post(`/${resourceName}/:id/comment`, vinylCollections.createVinylCollectionComment);
 router.post(`/${resourceName}/:id/items`, vinylCollections.addVinylsToCollection);
 router.delete(`/${resourceName}/:id/items`, vinylCollections.removeVinylsFromCollection);
