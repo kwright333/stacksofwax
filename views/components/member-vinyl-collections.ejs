@@ -1,0 +1,21 @@
+<%for (var i = 0; i < vinylCollections.length; i++) { %>
+<div class="card">
+  <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top" alt="Hollywood Sign on The Hill" />
+  <div class="card-body">
+    <h5 class="card-title"><%= vinylCollections[i].vinyl_collection_name %></h5>
+    <p class="card-text">
+        <%= vinylCollections[i].description %>
+    </p>
+    <p class="card#">
+      Likes: <%= vinylCollections[i].like_count %>
+    </p>
+    <a href="#" class="btn btn-primary">More Details</a>
+    <a href="#" class="btn btn-primary">Comments</a>
+    <button class="btn btn-block btn-primary" onclick="likeVinylCollection(<%= vinylCollections[i].vinyl_collection_id %>)"><i class="fa fa-thumbs-up"></i> Like</button>
+    <%if (showEdit) { %>
+      <button data-bs-toggle="modal" data-bs-target="#editCollectionModal<%= vinylCollections[i].vinyl_collection_id %>" class="btn btn-block btn-primary" ><i class="fa fa-pencil"></i> Edit</button>
+      <%- include('./edit-collection-modal', { modalId: `editCollectionModal${vinylCollections[i].vinyl_collection_id}`, collectionName: vinylCollections[i].vinyl_collection_name, collectionDescription: vinylCollections[i].description, selectedVinyls: [] }) %>
+    <% } %>
+  </div>
+</div>
+<% } %>

@@ -73,8 +73,13 @@ exports.likeVinyl = async function (req, res) {
         res.redirect('login.html');
     }
 
+    let memberId = null;
+    if (req.session.memberId) {
+        memberId = req.session.memberId;
+    }
+
     const result = await db.executeQuery(`UPDATE vinyl SET like_count = like_count + 1 WHERE vinyl_id = ${req.params.id}`);
-    const result1 = await db.executeQuery(`INSERT INTO rating VALUES (null, ${req.body.memberId}, ${req.params.id}, null)`);
+    const result1 = await db.executeQuery(`INSERT INTO rating VALUES (null, ${memberId}, ${req.params.id}, null)`);
     res.send({
         success: true
     });

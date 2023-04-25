@@ -58,33 +58,60 @@
         <p>Gender : <%= memberDetails.gender %></p>
 
         <div>
-          <button type="button" class="btn btn-dark">Add a Collection</button>
+          <button data-bs-toggle="modal" data-bs-target="#addCollectionModal" type="button" class="btn btn-dark">Add a Collection</button>
         </div>
 
 
       </div>
       <div class="col-6">
         <h2>My Collections</h2>
-        <%for (var i = 0; i < vinylCollections.length; i++) { %>
-        <div class="col">
-          <div class="card">
-            <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top" alt="Hollywood Sign on The Hill" />
-            <div class="card-body">
-              <h5 class="card-title"><%= vinylCollections[i].vinyl_collection_name %></h5>
-              <p class="card-text">
-                <%= vinylCollections[i].description %>
-              </p>
-              <p class="card-text">
-                likes: <%= vinylCollections[i].like_count %>
-              </p>
-              <a href="#" class="btn btn-dark">Edit</a>
-              <a href="#" class="btn btn-dark">View Comments</a>
-            </div>
-          </div>
+        <%- include('./components/member-vinyl-collections', { vinylCollections, showEdit }) %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="addCollectionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Add Collection
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <br>
-        <% } %>
-        <%- include('./member-vinyl-collections', { vinylCollections }) %>
+        <div class="modal-body">
+          <p>
+            <label>Collection Name</label>
+            <input type="text" value="" id="collection-name"> </input>
+          </p>
+          
+          <p>
+            <label>Description</label>
+            <input type="text" value="" id="collection-description"> </input>
+          </p>
+          
+          <p>
+            <label>Vinyls</label>
+            <select name="vinyl-selection" id="vinyl-selection">
+              <%for (var i = 0; i < vinyls.length; i++) { %> 
+                <option id="vinyl-option-<%= vinyls[i].vinyl_id %>" onclick="addToVinylList('<%= vinyls[i].vinyl_id %>', '<%= vinyls[i].album %>')"><%= vinyls[i].album %></option>
+              <% } %>
+            </select>
+          </p>
+          
+          <p>
+            <ul id="vinyl-list" >
+
+            </ul>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="clearSelection()">
+            Close
+          </button>
+          <button class="btn btn-block btn-primary" onclick="createVinylCollection()"><i class="fa fa-thumbs-up"></i> Add</button>
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,47 @@
+<!-- Modal -->
+<div class="modal fade" id="<%= modalId %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="<%= modalId %>">
+          Add Collection
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <label>Collection Name</label>
+          <input type="text" value="<%= collectionName %>" id="collection-name"> </input>
+        </p>
+
+        <p>
+          <label>Description</label>
+          <input type="text" value="<%= collectionDescription %>" id="collection-description"> </input>
+        </p>
+
+        <p>
+          <label>Vinyls</label>
+          <select name="vinyl-selection" id="vinyl-selection">
+            <%for (var i = 0; i < vinyls.length; i++) { %>
+            <option id="vinyl-option-<%= vinyls[i].vinyl_id %>" onclick="addToVinylList('<%= vinyls[i].vinyl_id %>', '<%= vinyls[i].album %>')"><%= vinyls[i].album %></option>
+            <% } %>
+          </select>
+        </p>
+
+        <p>
+        <ul id="vinyl-list">
+            <%for (var i = 0; i < selectedVinyls.length; i++) { %>
+                <li id="vinyl-selected-<%= vinyls[i].vinyl_id %>"><%= vinyls[i].album %> <i onclick="removeFromVinylList(<%= vinyls[i].vinyl_id %>)" class="fa fa-thin fa-delete-left" style="color: #40454f;"></i></li>
+            <% } %>
+        </ul>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="clearSelection()">
+          Close
+        </button>
+        <button class="btn btn-block btn-primary" onclick="updateVinylCollection()"><i class="fa fa-thumbs-up"></i> Update</button>
+      </div>
+    </div>
+  </div>
+</div>
