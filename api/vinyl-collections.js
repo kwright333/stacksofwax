@@ -50,7 +50,12 @@ exports.updateVinylCollection = async function (req, res) {
 }
 
 exports.createVinylCollectionComment = async function (req, res) {
-    const results = await db.executeQuery(`INSERT INTO comments VALUES (null, ${mysql.escape(req.body.comment)}, ${req.body.memberId}, ${req.body.vinylCollectionId})`);
+    let memberId = null;
+    if (req.session.memberId) {
+        memberId = req.session.memberId;
+    }
+
+    const results = await db.executeQuery(`INSERT INTO comments VALUES (null, ${mysql.escape(req.body.comment)}, ${memberId}, ${req.body.vinylCollectionId})`);
     res.send(results);
 }
 

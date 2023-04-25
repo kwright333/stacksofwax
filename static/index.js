@@ -139,3 +139,23 @@ async function updateVinylCollection(collectionId) {
         window.location.reload();
     }
 }
+
+async function addComment(collectionId) {
+    const commentInput = document.getElementById(`collection-comment-input-${collectionId}`);
+
+    const data = {
+        vinylCollectionId: collectionId,
+        comment: commentInput.value,
+    };
+    const response = await fetch(`/api/vinyl-collections/${collectionId}/comment`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+
+    if (response.status == 200) {
+        commentInput.text = '';
+    }
+} 
