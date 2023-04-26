@@ -9,6 +9,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <!-- Accordion to show the comments -->
         <div class="accordion" id="accordionPanelsStayOpenExample">
           <% for (comment of comments) { %>
           <div class="accordion-item">
@@ -26,6 +27,7 @@
           <% } %>
         </div>
         <hr />
+        <!-- Text box for adding a comment-->
         <div class="input-group">
           <textarea class="form-control" aria-label="With textarea" id="collection-comment-input-<%= vinylCollectionId %>"></textarea>
           <button class="btn btn-outline-secondary" type="button" onclick="addComment(<%= vinylCollectionId %>)">Comment</button>

@@ -1,3 +1,4 @@
+/* basic style of the web site */
 body{ 
     height: 100%;
     width: 100%;
@@ -18,7 +19,6 @@ body{
     padding: .8rem;
 }
 
-
 .nav-item{
     display: inline;
     width: 250px;
@@ -30,6 +30,7 @@ body{
   width: 100%;
 }
 
+/* login */
 .divider:after,
 .divider:before {
 content: "";
@@ -46,6 +47,7 @@ height: 100%;
 }
 }
 
+/* vinyl page art */
 .albums {
 padding:50px 0;
 cursor: pointer;
