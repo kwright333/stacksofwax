@@ -11,7 +11,18 @@ exports.getVinylsPage = async function (req, res) {
         memberId = req.session.memberId;
     }
     
-    res.render("vinyls.ejs", { vinyls, genres, artists, memberId } )
+    res.render("vinyls.ejs", { vinyls, genres, artists, memberId, filtering: true } )
+}
+
+exports.getVinylPage = async function (req, res) {
+    const vinyls = await db.executeQuery(`SELECT * FROM vinyl WHERE vinyl_id = '${req.params.id}'`);
+
+    let memberId = null;
+    if (req.session.memberId) {
+        memberId = req.session.memberId;
+    }
+    
+    res.render("vinyls.ejs", { vinyls, memberId, filtering: false } )
 }
 
 exports.getAllVinyls = async function (req, res) {

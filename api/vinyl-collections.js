@@ -1,5 +1,6 @@
-let db = require('../db')
+let db = require('../db');
 let mysql = require('mysql');
+const ejs = require('ejs');
 
 exports.getAllVinylCollections = async function (req, res) {
     const results = await db.executeQuery(`SELECT * FROM vinyl_collection`);
@@ -100,7 +101,13 @@ exports.likeVinylCollection = async function (req, res) {
 }
 
 exports.renderVinylCollectionsPage = async function (req, res) {
-    const vinylCollectionsResults = await db.executeQuery(`SELECT * FROM vinyl_collection ORDER BY vinyl_collection_id DESC`);
+    let vinylCollectionsResults = null;
+    if (req.params.id) {
+        vinylCollectionsResults = await db.executeQuery(`SELECT * FROM vinyl_collection WHERE vinyl_collection_id = ${req.params.id}`);
+    } else {
+        vinylCollectionsResults = await db.executeQuery(`SELECT * FROM vinyl_collection ORDER BY vinyl_collection_id DESC`);
+    }
+
     const vinyls = await db.executeQuery(`SELECT vinyl_id, album, album_art FROM vinyl`);
     
     const vinylCollectionsPromises = await vinylCollectionsResults.map(async function(vinylCollection) {
@@ -118,9 +125,12 @@ exports.renderVinylCollectionsPage = async function (req, res) {
     let memberId = null;
     if (req.session.memberId) {
         memberId = req.session.memberId;
+        req.session.loggedIn = true;
+    } else {
+        req.session.loggedIn = false;
     }
     
-    res.render("collections.ejs", { vinylCollections, memberId, showEdit: false, vinyls } );
+    res.render("collections.ejs", { vinylCollections, memberId, showEdit: false, vinyls, loggedIn: req.session.loggedIn } );
 }
 
 exports.renderVinylCollectionsForMember = async function (req, res) {

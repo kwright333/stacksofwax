@@ -161,3 +161,28 @@ async function addComment(collectionId) {
         commentInput.text = '';
     }
 } 
+
+async function search() {
+    const searchInput = document.getElementById(`search-input`);
+
+    const data = {
+        searchText: searchInput.value
+    };
+    const response = await fetch(`/api/search`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+        const content = await response.text();
+
+        document.getElementById('search-results').innerHTML = content;
+
+        const dropdownToggleElement = document.getElementById('search-addon');
+        const dropdown = new bootstrap.Dropdown(dropdownToggleElement);
+        dropdown.show();
+    }
+}
