@@ -118,9 +118,12 @@ exports.renderVinylCollectionsPage = async function (req, res) {
     let memberId = null;
     if (req.session.memberId) {
         memberId = req.session.memberId;
+        req.session.loggedIn = true;
+    } else {
+        req.session.loggedIn = false;
     }
     
-    res.render("collections.ejs", { vinylCollections, memberId, showEdit: false, vinyls } );
+    res.render("collections.ejs", { vinylCollections, memberId, showEdit: false, vinyls, loggedIn: req.session.loggedIn } );
 }
 
 exports.renderVinylCollectionsForMember = async function (req, res) {

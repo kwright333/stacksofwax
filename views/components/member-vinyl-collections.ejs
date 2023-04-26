@@ -41,7 +41,7 @@
       <%- include('./collection-comments', { comments:
       vinylCollections[i].collectionComments, modalId:
       `collection-comments-${vinylCollections[i].vinyl_collection_id}`,
-      vinylCollectionId: vinylCollections[i].vinyl_collection_id }) %>
+      vinylCollectionId: vinylCollections[i].vinyl_collection_id, loggedIn }) %>
 
       <button
         class="btn btn-block btn-primary"
