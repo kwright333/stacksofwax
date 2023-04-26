@@ -19,6 +19,7 @@
           <input type="text" value="<%= collectionDescription %>" id="collection-description-<%= collectionId %>"> </input>
         </p>
 
+        <!-- Edit vinyls in the collection -->
         <p>
           <label>Vinyls</label>
           <select id="vinyl-selection-<%= collectionId %>" data-collection-id="<%= collectionId %>" onchange="addToVinylList(this.value)">
@@ -43,7 +44,7 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="clearSelection()">
           Close
         </button>
-        <button class="btn btn-block btn-primary" onclick="updateVinylCollection(<%= collectionId %>)"><i class="fa fa-thumbs-up"></i> Update</button>
+        <button class="btn btn-block btn-primary" onclick="updateVinylCollection(<%= collectionId %>)"><i class="fa fa-pencil"></i> Update</button>
       </div>
     </div>
   </div>
