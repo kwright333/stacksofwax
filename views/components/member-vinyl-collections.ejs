@@ -1,35 +1,65 @@
+<!-- Displaying collections-->
 <%for (var i = 0; i < vinylCollections.length; i++) { %>
-<div class="card">
-
-  <!-- Gallery -->
-  <%for (var j = 0; j < vinylCollections[i].vinylList.length; j++) { %>
-  <% let art = vinylCollections[i].vinylList[j].art %>
-  <% console.log('art', art) %>
-  <div class="row">
-    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-      <img src="<%= art %>" class="w-100 shadow-1-strong rounded mb-4" />
+  <div class="card">
+    <!-- Displaying vinyl art in the collection card -->
+    <div class="row">
+      <%for (var j = 0; j < vinylCollections[i].vinylList.length; j++) { %> <% let
+      art = vinylCollections[i].vinylList[j].art %> <% console.log('art', art) %>
+        <div class="col-lg-4 flex-wrap">
+          <img src="<%= art %>" class="w-100 shadow-1-strong rounded mb-4" />
+        </div>
+<% } %>
     </div>
-  </div>
-  <% } %>
+
   <div class="card-body">
     <h5 class="card-title"><%= vinylCollections[i].vinyl_collection_name %></h5>
-    <p class="card-text">
-      <%= vinylCollections[i].description %>
-    </p>
-    <p class="card#">
-      Likes: <%= vinylCollections[i].like_count %>
-    </p>
-    <a href="#" data-bs-toggle="modal" data-bs-target="#collection-vinyls-<%= vinylCollections[i].vinyl_collection_id %>" class="btn btn-primary">More Details</a>
-    <%- include('./more-details', { collectionName: vinylCollections[i].vinyl_collection_name, modalNum: vinylCollections[i].vinyl_collection_id, vinyls: vinylCollections[i].vinylList }) %>
+    <p class="card-text"><%= vinylCollections[i].description %></p>
+    <p class="card#">Likes: <%= vinylCollections[i].like_count %></p>
+    <a
+      href="#"
+      data-bs-toggle="modal"
+      data-bs-target="#collection-vinyls-<%= vinylCollections[i].vinyl_collection_id %>"
+      class="btn btn-primary"
+      >More Details</a
+    >
+    <%- include('./more-details', { collectionName:
+    vinylCollections[i].vinyl_collection_name, modalNum:
+    vinylCollections[i].vinyl_collection_id, vinyls:
+    vinylCollections[i].vinylList }) %>
 
-    <a href="#" data-bs-toggle="modal" data-bs-target="#collection-comments-<%= vinylCollections[i].vinyl_collection_id %>" class="btn btn-primary">Comments</a>
-    <%- include('./collection-comments', { comments: vinylCollections[i].collectionComments, modalId: `collection-comments-${vinylCollections[i].vinyl_collection_id}`, vinylCollectionId: vinylCollections[i].vinyl_collection_id }) %>
+    <a
+      href="#"
+      data-bs-toggle="modal"
+      data-bs-target="#collection-comments-<%= vinylCollections[i].vinyl_collection_id %>"
+      class="btn btn-primary"
+      >Comments</a
+    >
+    <%- include('./collection-comments', { comments:
+    vinylCollections[i].collectionComments, modalId:
+    `collection-comments-${vinylCollections[i].vinyl_collection_id}`,
+    vinylCollectionId: vinylCollections[i].vinyl_collection_id }) %>
 
-    <button class="btn btn-block btn-primary" onclick="likeVinylCollection(<%= vinylCollections[i].vinyl_collection_id %>)"><i class="fa fa-thumbs-up"></i> Like</button>
+    <button
+      class="btn btn-block btn-primary"
+      onclick="likeVinylCollection(<%= vinylCollections[i].vinyl_collection_id %>)"
+    >
+      <i class="fa fa-thumbs-up"></i> Like
+    </button>
     <%if (showEdit) { %>
-    <button data-bs-toggle="modal" data-bs-target="#editCollectionModal<%= vinylCollections[i].vinyl_collection_id %>" class="btn btn-block btn-primary" onclick="editVinylCollection(<%= vinylCollections[i].vinyl_collection_id %>)"><i class="fa fa-pencil"></i> Edit</button>
-    <%- include('./edit-collection-modal', { modalId: `editCollectionModal${vinylCollections[i].vinyl_collection_id}`, collectionId: vinylCollections[i].vinyl_collection_id, collectionName: vinylCollections[i].vinyl_collection_name, collectionDescription: vinylCollections[i].description, selectedVinyls: vinylCollections[i].vinylList, vinyls }) %>
-    <% } %>
+    <button
+      data-bs-toggle="modal"
+      data-bs-target="#editCollectionModal<%= vinylCollections[i].vinyl_collection_id %>"
+      class="btn btn-block btn-primary"
+      onclick="editVinylCollection(<%= vinylCollections[i].vinyl_collection_id %>)"
+    >
+      <i class="fa fa-pencil"></i> Edit
+    </button>
+    <%- include('./edit-collection-modal', { modalId:
+    `editCollectionModal${vinylCollections[i].vinyl_collection_id}`,
+    collectionId: vinylCollections[i].vinyl_collection_id, collectionName:
+    vinylCollections[i].vinyl_collection_name, collectionDescription:
+    vinylCollections[i].description, selectedVinyls:
+    vinylCollections[i].vinylList, vinyls }) %> <% } %>
   </div>
 </div>
 <% } %>
