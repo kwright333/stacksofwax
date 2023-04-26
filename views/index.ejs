@@ -121,6 +121,7 @@
                         </div>
                     </div>
             </div>
+
             <!-- Showing vinyls from current year-->
             <div class="col-sm-3">
                 <h4>New Releases</h4>
@@ -135,6 +136,7 @@
         </div>
     </div>
 
+    <!-- Showing top collections -->
     <div class="container-fluid text-center padding">
         <br>
         <h1>Collection Show Case</h1>
@@ -171,7 +173,7 @@
                               <img src="<%= art %>" class="w-100 shadow-1-strong rounded mb-4" />
                             </div>
                             <% } %>
-                          </div>
+                        </div>
                             <div class="card-body">
                                 <h5 class="card-title"><%= topRatedVinylCollections[1].vinyl_collection_name %></h5>
                                 <p class="card-text">
@@ -179,10 +181,8 @@
                                 </p>
                                 <p class="card#">Likes: <%= topRatedVinylCollections[1].like_count %></p>
                             </div>
-                      </div>
                     </div>
                 </div>
-                
                 
                     <div class="col">
                         <div class="card">
@@ -194,7 +194,7 @@
                                   <img src="<%= art %>" class="w-100 shadow-1-strong rounded mb-4" />
                                 </div>
                                 <% } %>
-                              </div>
+                            </div>
                                 <div class="card-body">
                                     <h5 class="card-title"><%= topRatedVinylCollections[2].vinyl_collection_name %></h5>
                                     <p class="card-text">
@@ -202,11 +202,13 @@
                                     </p>
                                     <p class="card#">Likes: <%= topRatedVinylCollections[2].like_count %></p>
                                 </div>
-                          </div>
                         </div>
                     </div>
-                </div>
+                    
+                
                 <br>
+        </div>    
+
 
     </div>
     </body>
