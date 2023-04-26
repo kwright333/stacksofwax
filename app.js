@@ -1,6 +1,7 @@
-let vinyls = require("./api/vinyls")
-let vinylCollections = require("./api/vinyl-collections")
-let member = require("./api/member")
+let vinyls = require("./api/vinyls");
+let vinylCollections = require("./api/vinyl-collections");
+let member = require("./api/member");
+let search = require("./api/search");
 const createSession = require("./db").createSession;
 
 let express = require('express');
@@ -38,8 +39,10 @@ app.get('/', vinyls.getHomePage);
 
 // Creates a route that renders views/vinyls.ejs
 app.get('/vinyls', vinyls.getVinylsPage);
+app.get('/vinyls/:id', vinyls.getVinylPage);
 app.get('/members/:id', member.renderMemberDetails)
 app.get('/collections', vinylCollections.renderVinylCollectionsPage)
+app.get('/collections/:id', vinylCollections.renderVinylCollectionsPage)
 
 
 //////////////////////////////////////////////////////
@@ -85,6 +88,11 @@ router.get(`/${resourceName}/:id`, vinylCollections.getVinylCollectionById);
 router.post('/register', member.registerNewMember);
 router.post('/login', member.login);
 router.get('/member/:id', member.getMemberDetails);
+
+///////////////////
+// Search routes //
+///////////////////
+router.post('/search', search.search)
 
 router.use(logPath);
 

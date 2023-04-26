@@ -1,0 +1,15 @@
+<ul class="dropdown-menu">
+  <li><a class="dropdown-item disabled">Vinyls</a></li>
+
+  <% for (vinyl of vinyls) { %>
+  <li><a class="dropdown-item" href="/vinyls/<%= vinyl.vinylId %>"><%= vinyl.album %></a></li>
+  <% } %>
+  <li>
+    <hr class="dropdown-divider">
+  </li>
+  <li><a class="dropdown-item disabled">Collections</a></li>
+
+  <% for (collection of collections) { %>
+  <li><a class="dropdown-item" href="/collections/<%= collection.id %>"><%= collection.collectionName %></a></li>
+  <% } %>
+</ul>
