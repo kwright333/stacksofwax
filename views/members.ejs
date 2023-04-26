@@ -50,6 +50,7 @@
   <div class="container-fluid padding">
     <div class="row main text-center padding">
       <div class="col-6">
+        <!-- Show details -->
         <h2>My Details</h2>
         <br>
         <p>Name : <%= memberDetails.first_name %> <%= memberDetails.last_name %></p>
@@ -57,12 +58,14 @@
         <p>Country : <%= memberDetails.country %></p>
         <p>Gender : <%= memberDetails.gender %></p>
 
+        <!-- Add collection -->
         <div>
           <button data-bs-toggle="modal" data-bs-target="#addCollectionModal" type="button" class="btn btn-dark">Add a Collection</button>
         </div>
 
 
       </div>
+      <!-- Display collections -->
       <div class="col-6">
         <h2>My Collections</h2>
         <%- include('./components/member-vinyl-collections', { vinylCollections, showEdit, vinyls }) %>
@@ -70,7 +73,7 @@
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal for adding collections -->
   <div class="modal fade" id="addCollectionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">

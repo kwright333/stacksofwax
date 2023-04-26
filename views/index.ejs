@@ -48,6 +48,7 @@
     </div>
     </span>
 
+    <!-- Main site information -->
     <div class="container-fluid padding">
         <div class="row main text-center padding">
             <div class="col-sm-3">
@@ -57,11 +58,11 @@
                         This is a website for people who love vinyls. With this website you can share your collection
                         and even follow others, a place for the vinyl community to come together.
                     </p>
-                    <div id="test"></div>
+                    
             </div>
             <div class="col-sm-6">
                 <h2 class="display-6">Top Vinyl's</h1>
-
+                    <!-- Carousel showing top 9 vinyls -->
                     <div id="carouselExampleIndicators" class="carousel slide">
                         <div class="carousel-indicators">
                           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -104,7 +105,7 @@
                         </button>
                       </div>
 
-                    
+                    <!-- YouTube Videos -->
                     <div class="videos row nested text-center padding">
                         <div class="col-sm-6 flex-wrap">
                             <br>
@@ -120,6 +121,7 @@
                         </div>
                     </div>
             </div>
+            <!-- Showing vinyls from current year-->
             <div class="col-sm-3">
                 <h4>New Releases</h4>
                 <%for (var i = 0; i < vinyls.length; i++) { %> 
@@ -139,14 +141,21 @@
         <div class="row">
             <div class="col">
               <div class="card">
-                 <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
-                  alt="Hollywood Sign on The Hill" />
+                <div class="row">
+                    <%for (var j = 0; j < topRatedVinylCollections[0].vinylList.length; j++) { %> <%
+                    let art = topRatedVinylCollections[0].vinylList[j].art %> <% console.log('art',
+                    art) %>
+                    <div class="col-lg-4 flex-wrap">
+                      <img src="<%= art %>" class="w-100 shadow-1-strong rounded mb-4" />
+                    </div>
+                    <% } %>
+                  </div>
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
+                        <h5 class="card-title"><%= topRatedVinylCollections[0].vinyl_collection_name %></h5>
                         <p class="card-text">
-                        This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.
+                            <%= topRatedVinylCollections[0].description %>
                         </p>
+                        <p class="card#">Likes: <%= topRatedVinylCollections[0].like_count %></p>
                     </div>
               </div>
             </div>
@@ -154,31 +163,47 @@
             
                 <div class="col">
                     <div class="card">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
-                         alt="Hollywood Sign on The Hill" />
+                        <div class="row">
+                            <%for (var j = 0; j < topRatedVinylCollections[1].vinylList.length; j++) { %> <%
+                            let art = topRatedVinylCollections[1].vinylList[j].art %> <% console.log('art',
+                            art) %>
+                            <div class="col-lg-4 flex-wrap">
+                              <img src="<%= art %>" class="w-100 shadow-1-strong rounded mb-4" />
+                            </div>
+                            <% } %>
+                          </div>
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
+                                <h5 class="card-title"><%= topRatedVinylCollections[1].vinyl_collection_name %></h5>
                                 <p class="card-text">
-                                This is a longer card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
+                                    <%= topRatedVinylCollections[1].description %>
                                 </p>
-                            </div>    
+                                <p class="card#">Likes: <%= topRatedVinylCollections[1].like_count %></p>
+                            </div>
+                      </div>
                     </div>
                 </div>
                 
                 
                     <div class="col">
-                      <div class="card">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
-                          alt="Hollywood Sign on The Hill" />
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            This is a longer card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.
-                          </p>
+                        <div class="card">
+                            <div class="row">
+                                <%for (var j = 0; j < topRatedVinylCollections[2].vinylList.length; j++) { %> <%
+                                let art = topRatedVinylCollections[2].vinylList[j].art %> <% console.log('art',
+                                art) %>
+                                <div class="col-lg-4 flex-wrap">
+                                  <img src="<%= art %>" class="w-100 shadow-1-strong rounded mb-4" />
+                                </div>
+                                <% } %>
+                              </div>
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= topRatedVinylCollections[2].vinyl_collection_name %></h5>
+                                    <p class="card-text">
+                                        <%= topRatedVinylCollections[2].description %>
+                                    </p>
+                                    <p class="card#">Likes: <%= topRatedVinylCollections[2].like_count %></p>
+                                </div>
+                          </div>
                         </div>
-                      </div>
                     </div>
                 </div>
                 <br>
