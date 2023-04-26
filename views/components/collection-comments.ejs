@@ -28,7 +28,7 @@
         </div>
         <hr />
         <!-- Text box for adding a comment-->
-        <% console.log('loggedin', loggedIn); if (loggedIn) { %>
+        <% if (loggedIn) { %>
         <div class="input-group">
           <textarea class="form-control" aria-label="With textarea" id="collection-comment-input-<%= vinylCollectionId %>"></textarea>
           <button class="btn btn-outline-secondary" type="button" onclick="addComment(<%= vinylCollectionId %>)">Comment</button>

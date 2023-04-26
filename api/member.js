@@ -69,5 +69,13 @@ exports.renderMemberDetails = async function (req, res) {
     });
     const vinylCollections = await Promise.all(vinylCollectionsPromises);
 
-    res.render("members.ejs", { memberDetails: memberDetails[0], vinylCollections, vinyls, showEdit: true } );
+    let memberId = null;
+    if (req.session.memberId) {
+        memberId = req.session.memberId;
+        req.session.loggedIn = true;
+    } else {
+        req.session.loggedIn = false;
+    }
+
+    res.render("members.ejs", { memberDetails: memberDetails[0], vinylCollections, vinyls, showEdit: true, loggedIn: req.session.loggedIn } );
 }

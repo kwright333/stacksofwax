@@ -43,12 +43,14 @@
       `collection-comments-${vinylCollections[i].vinyl_collection_id}`,
       vinylCollectionId: vinylCollections[i].vinyl_collection_id, loggedIn }) %>
 
+      <% if (loggedIn) { %>
       <button
         class="btn btn-block btn-primary"
         onclick="likeVinylCollection(<%= vinylCollections[i].vinyl_collection_id %>)"
       >
         <i class="fa fa-thumbs-up"></i> Like
       </button>
+      <% } %>
       <%if (showEdit) { %>
       <button
         data-bs-toggle="modal"
