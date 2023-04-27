@@ -1,15 +1,13 @@
-let db = require('../db')
-const ejs = require('ejs')
+let db = require('../db');
+const ejs = require('ejs');
+const helper = require('./helper');
 
 exports.getVinylsPage = async function (req, res) {
     const vinyls = await db.executeQuery(`SELECT * FROM vinyl`);
     const genres = await db.executeQuery(`SELECT DISTINCT genre FROM vinyl`);
     const artists = await db.executeQuery(`SELECT DISTINCT artist FROM vinyl`);
 
-    let memberId = null;
-    if (req.session.memberId) {
-        memberId = req.session.memberId;
-    }
+    let memberId = helper.getMemberId(req);
     
     res.render("vinyls.ejs", { vinyls, genres, artists, memberId, filtering: true } )
 }
@@ -17,10 +15,7 @@ exports.getVinylsPage = async function (req, res) {
 exports.getVinylPage = async function (req, res) {
     const vinyls = await db.executeQuery(`SELECT * FROM vinyl WHERE vinyl_id = '${req.params.id}'`);
 
-    let memberId = null;
-    if (req.session.memberId) {
-        memberId = req.session.memberId;
-    }
+    let memberId = helper.getMemberId(req);
     
     res.render("vinyls.ejs", { vinyls, memberId, filtering: false } )
 }
@@ -73,10 +68,7 @@ exports.getHomePage = async function (req, res) {
     const topVinyls = await db.executeQuery(`SELECT * FROM vinyl ORDER BY like_count DESC LIMIT 9`);
     const topRatedVinylCollections = await db.executeQuery(`SELECT * FROM vinyl_collection ORDER BY like_count DESC LIMIT 3`);
 
-    let memberId = null;
-    if (req.session.memberId) {
-        memberId = req.session.memberId;
-    }
+    let memberId = helper.getMemberId(req);
     
     const vinylCollectionsPromises = await topRatedVinylCollections.map(async function(vinylCollection) {
         const vinylListResults = await db.executeQuery(`SELECT vinyl_id FROM vinyl_collections_items WHERE vinyl_collection_id = ${vinylCollection.vinyl_collection_id}`);
@@ -95,13 +87,10 @@ exports.getHomePage = async function (req, res) {
 
 exports.likeVinyl = async function (req, res) {
     if (!req.session.loggedIn) {
-        res.redirect('login.html');
+        res.redirect('/login');
     }
 
-    let memberId = null;
-    if (req.session.memberId) {
-        memberId = req.session.memberId;
-    }
+    let memberId = helper.getMemberId(req);
 
     const result = await db.executeQuery(`UPDATE vinyl SET like_count = like_count + 1 WHERE vinyl_id = ${req.params.id}`);
     const result1 = await db.executeQuery(`INSERT INTO rating VALUES (null, ${memberId}, ${req.params.id}, null)`);

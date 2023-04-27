@@ -85,8 +85,9 @@
                 <label class="form-label" for="password">Password</label>
               </div>
   
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4" onclick="window.location.href = 'login.html';">
+              <button type="submit" class="btn btn-primary btn-block mb-4" onclick="window.location.href = '/login';">
                 Sign up
               </button>
               </form>

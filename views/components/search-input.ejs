@@ -1,6 +1,7 @@
 <div class="container-fluid col-md-auto">
   <div class="dropdown">
     <div class="input-group rounded">
+      <input id="search-csrf" type="hidden" name="_csrf" value="<%= csrfToken %>">
       <input id="search-input" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
       <span class="input-group-text border-0" id="search-addon" onclick="search()" data-bs-toggle="dropdown">
         <i class="fas fa-magnifying-glass"></i>

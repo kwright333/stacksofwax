@@ -6,7 +6,8 @@ const connectionOptions = {
     host: 'localhost',
     user: 'root',
     database: 'stacks_of_wax',
-    port: 3306
+    port: 3306,
+    charset: 'utf8mb4'
 };
 
 if (process.env.MYSQL_PASSWORD) {
@@ -18,15 +19,19 @@ const sessionStore = new MySQLStore({}, connection);
 connection.connect();
 
 
-exports.executeQuery = async function(query) {
+exports.executeQuery = async function(query, values) {
     return await new Promise((resolve, reject) => {
-        connection.query(query, function (error, results, fields) {
+        connection.query(query, values, function (error, results, fields) {
             if (error) reject(error);
             if (process.env.LOG_LEVEL === 'debug')
                 console.log('The solution is: ', results);
             resolve(results);
         });
     })
+}
+
+exports.executeQueryWithCallback = function(query, values, cb) {
+    return connection.query(query, values, cb);
 }
 
 exports.createSession = function() {

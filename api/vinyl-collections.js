@@ -1,6 +1,7 @@
 let db = require('../db');
 let mysql = require('mysql');
 const ejs = require('ejs');
+const helper = require('./helper');
 
 exports.getAllVinylCollections = async function (req, res) {
     const results = await db.executeQuery(`SELECT * FROM vinyl_collection`);
@@ -18,10 +19,7 @@ exports.getTopRatedVinylCollections = async function (req, res) {
 }
 
 exports.createVinylCollection = async function (req, res) {
-    let memberId = null;
-    if (req.session.memberId) {
-        memberId = req.session.memberId;
-    }
+    let memberId = helper.getMemberId(req);
 
     const results = await db.executeQuery(`INSERT INTO vinyl_collection VALUES (null, ${memberId}, ${mysql.escape(req.body.collectionName)}, ${mysql.escape(req.body.description)}, 0)`);
 
@@ -34,10 +32,7 @@ exports.createVinylCollection = async function (req, res) {
 }
 
 exports.updateVinylCollection = async function (req, res) {
-    let memberId = null;
-    if (req.session.memberId) {
-        memberId = req.session.memberId;
-    }
+    let memberId = helper.getMemberId(req);
 
     const results = await db.executeQuery(`UPDATE vinyl_collection SET vinyl_collection_name = ${mysql.escape(req.body.collectionName)}, description = ${mysql.escape(req.body.description)} WHERE vinyl_collection_id = ${req.body.collectionId}`);
 
@@ -51,10 +46,7 @@ exports.updateVinylCollection = async function (req, res) {
 }
 
 exports.createVinylCollectionComment = async function (req, res) {
-    let memberId = null;
-    if (req.session.memberId) {
-        memberId = req.session.memberId;
-    }
+    let memberId = helper.getMemberId(req);
 
     const results = await db.executeQuery(`INSERT INTO comments VALUES (null, ${mysql.escape(req.body.comment)}, ${memberId}, ${req.body.vinylCollectionId})`);
     res.send(results);
@@ -85,13 +77,10 @@ exports.removeVinylsFromCollection = async function (req, res) {
 
 exports.likeVinylCollection = async function (req, res) {
     if (!req.session.loggedIn) {
-        res.redirect('login.html');
+        res.redirect('/login');
     }
 
-    let memberId = null;
-    if (req.session.memberId) {
-        memberId = req.session.memberId;
-    }
+    let memberId = helper.getMemberId(req);
     
     const result = await db.executeQuery(`UPDATE vinyl_collection SET like_count = like_count + 1 WHERE vinyl_collection_id = ${req.params.id}`);
     const result1 = await db.executeQuery(`INSERT INTO rating VALUES (null, ${memberId}, null, ${req.params.id})`);
@@ -122,9 +111,8 @@ exports.renderVinylCollectionsPage = async function (req, res) {
     });
     const vinylCollections = await Promise.all(vinylCollectionsPromises);
 
-    let memberId = null;
-    if (req.session.memberId) {
-        memberId = req.session.memberId;
+    let memberId = helper.getMemberId(req);
+    if (memberId) {
         req.session.loggedIn = true;
     } else {
         req.session.loggedIn = false;
@@ -136,10 +124,7 @@ exports.renderVinylCollectionsPage = async function (req, res) {
 exports.renderVinylCollectionsForMember = async function (req, res) {
     const vinylCollections = await db.executeQuery(`SELECT * FROM vinyl_collection WHERE member_id = '${req.params.id}' ORDER BY vinyl_collection_id DESC`);
 
-    let memberId = null;
-    if (req.session.memberId) {
-        memberId = req.session.memberId;
-    }
+    let memberId = helper.getMemberId(req);
 
     await ejs.renderFile('views/member-vinyl-collections.ejs', { vinylCollections });
     

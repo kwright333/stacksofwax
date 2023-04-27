@@ -164,9 +164,11 @@ async function addComment(collectionId) {
 
 async function search() {
     const searchInput = document.getElementById(`search-input`);
+    const csrfToken = document.getElementById(`search-csrf`).value;
 
     const data = {
-        searchText: searchInput.value
+        searchText: searchInput.value,
+        _csrf: csrfToken
     };
     const response = await fetch(`/api/search`, {
         method: 'POST',
