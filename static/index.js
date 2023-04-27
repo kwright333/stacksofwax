@@ -13,12 +13,25 @@ async function likeVinyl(id) {
 }
 
 async function likeVinylCollection(id) {
+    const csrfToken = document.getElementById(`search-csrf`).value;
+
+    const data = {
+        _csrf: csrfToken
+    };
+
     await fetch(`/api/vinyl-collections/${id}/like`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
         },
+        body: JSON.stringify(data)
     });
+
+    const element = document.getElementById(`like-count-${id}`);
+
+    const newLikeCount = parseInt(element.innerHTML.split(':')[1].trim()) +1 
+
+    element.innerHTML = `Likes: ${newLikeCount}`;
 }
 
 async function filterVinylsByGenre(genre) {

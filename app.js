@@ -7,7 +7,6 @@ var ensureLogIn = require('connect-ensure-login').ensureLoggedIn;
 
 var ensureLoggedIn = ensureLogIn();
 
-var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var crypto = require('crypto');

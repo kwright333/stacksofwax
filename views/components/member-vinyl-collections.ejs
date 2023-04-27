@@ -18,7 +18,7 @@
         <%= vinylCollections[i].vinyl_collection_name %>
       </h5>
       <p class="card-text"><%= vinylCollections[i].description %></p>
-      <p class="card#">Likes: <%= vinylCollections[i].like_count %></p>
+      <p id="like-count-<%= vinylCollections[i].vinyl_collection_id %>" class="card#">Likes: <%= vinylCollections[i].like_count %></p>
       <a
         href="#"
         data-bs-toggle="modal"
