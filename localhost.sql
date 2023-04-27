@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1deb5ubuntu1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 26, 2023 at 11:41 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Host: localhost:3306
+-- Generation Time: Apr 27, 2023 at 07:25 PM
+-- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
+-- PHP Version: 8.1.2-1ubuntu2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,7 +35,7 @@ CREATE TABLE `comments` (
   `comment` text NOT NULL,
   `member_id` int(11) NOT NULL,
   `vinyl_collection_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `comments`
@@ -57,19 +57,21 @@ CREATE TABLE `members` (
   `last_name` varchar(255) NOT NULL,
   `age` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,
-  `gender` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `gender` varchar(255) NOT NULL,
+  `hash_password` blob NOT NULL,
+  `salt` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `members`
 --
 
-INSERT INTO `members` (`member_id`, `first_name`, `last_name`, `age`, `email`, `password`, `country`, `gender`) VALUES
-(1, 'Sean', 'Kennedy', 28, 'sean@hotmail.co.uk', 'apples1!', 'UK', 'Male'),
-(2, 'John', 'Smith', 21, 'john@hotmail.com', 'password', 'USA', 'Male'),
-(3, 'Jane', 'Jones', 29, 'jane@hotmail.co.uk', 'password', 'Spain', 'Female');
+INSERT INTO `members` (`member_id`, `first_name`, `last_name`, `age`, `email`, `country`, `gender`, `hash_password`, `salt`) VALUES
+(2, 'John', 'Smith', 21, 'john@hotmail.com', 'USA', 'Male', '', ''),
+(3, 'Jane', 'Jones', 29, 'jane@hotmail.co.uk', 'Spain', 'Female', '', ''),
+(9, 'Test', 'User', 1, 's@s.com', 's', 'ws', 0x5c4a8f018cb748499a77aacb816fc2914c89e6031d1cbefec1a58a221846c758, 0xb66890080b105463f1d8d72093099fa8),
+(10, 'Sean', 'Kennedy', 22, 'sean@hotmail.co.uk', 'UK', 'Male', 0xb30756d07fab13e8f29cde24d046c0f2d1a6f339034ee8bd06cf7d1acd5395f2, 0xb1e907b356bd90136924c789ee4538e8);
 
 -- --------------------------------------------------------
 
@@ -82,7 +84,7 @@ CREATE TABLE `rating` (
   `member_id` int(11) NOT NULL,
   `vinyl_id` int(11) DEFAULT NULL,
   `vinyl_collection_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -91,18 +93,41 @@ CREATE TABLE `rating` (
 --
 
 CREATE TABLE `sessions` (
-  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `session_id` varchar(128) NOT NULL,
   `expires` int(11) UNSIGNED NOT NULL,
-  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `data` mediumtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sessions`
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
+('-8UZb8-x2c9HvK09fTt9qw54Gwz3_qaF', 1682638596, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":6,\"username\":\"craig@hotmail.co.uk\"}}}'),
+('71_eEIzAsOzpUP1eGUZewr6J4RMYXVOP', 1682702986, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{}}}'),
 ('BAq_aG-IvNEj58QTAOshwzL6gXbG3abQ', 1682629915, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"loggedIn\":true,\"memberId\":3}'),
-('KnRA6H_oF2m4qANkcd5M752KyNJl_XVX', 1682546409, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"loggedIn\":true,\"memberId\":3}');
+('qXcLPUpaKNAE9NjMqPoacDs8H4qtzade', 1682704745, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":10,\"email\":\"sean@hotmail.co.uk\"}},\"csrfSecret\":\"cbaJCcleBvMQPDznuPhsaSsi\",\"messages\":[],\"loggedIn\":true}'),
+('RrvTCam0ssk5hPWB8Gd0BVJ29Qburr1f', 1682704709, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":10,\"email\":\"sean@hotmail.co.uk\"}},\"csrfSecret\":\"K72gvNyfHftt2zmPLb--kWNG\",\"messages\":[],\"loggedIn\":true}'),
+('vpUXdVoG3XxP-_WY74AzPECTBT3jFot7', 1682706161, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":10,\"email\":\"sean@hotmail.co.uk\"}},\"csrfSecret\":\"ij9eHYCfSbRMjLiRAIBDhHmW\",\"messages\":[],\"loggedIn\":true}'),
+('XqYpPu9sNwMwWzDI_MDnT08kmLJFoSPc', 1682705099, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":10,\"email\":\"sean@hotmail.co.uk\"}},\"csrfSecret\":\"lqgC_9XYm8qE7kv2tK1mDBqz\",\"messages\":[]}'),
+('ZIbm6FFT2Msu2ilIeMmInUvWSZYSG8TI', 1682703885, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":10,\"email\":\"sean@hotmail.co.uk\"}},\"csrfSecret\":\"ySwhTLgZSlQFqQc3oReYBcFY\",\"messages\":[]}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test`
+--
+
+CREATE TABLE `test` (
+  `hash` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `test`
+--
+
+INSERT INTO `test` (`hash`) VALUES
+('9d');
 
 -- --------------------------------------------------------
 
@@ -117,10 +142,10 @@ CREATE TABLE `vinyl` (
   `year` int(11) NOT NULL,
   `genre` varchar(255) NOT NULL,
   `record_company` varchar(255) NOT NULL,
-  `tracklist` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`tracklist`)),
+  `tracklist` longtext NOT NULL CHECK (json_valid(`tracklist`)),
   `like_count` int(11) NOT NULL,
   `album_art` varchar(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vinyl`
@@ -202,15 +227,15 @@ CREATE TABLE `vinyl_collection` (
   `vinyl_collection_name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `like_count` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vinyl_collection`
 --
 
 INSERT INTO `vinyl_collection` (`vinyl_collection_id`, `member_id`, `vinyl_collection_name`, `description`, `like_count`) VALUES
-(19, 1, 'Rock Collection', 'All my rock albums', 10),
-(20, 1, 'Chill Music', 'More relaxed music', 3),
+(19, 10, 'Rock Collection', 'All my rock albums', 10),
+(20, 10, 'Chill Music', 'More relaxed music', 3),
 (21, 2, 'My collection', 'Just all the albums I own', 1),
 (22, 3, 'Mood Music', 'Music to make you feel good', 0);
 
@@ -223,7 +248,7 @@ INSERT INTO `vinyl_collection` (`vinyl_collection_id`, `member_id`, `vinyl_colle
 CREATE TABLE `vinyl_collections_items` (
   `vinyl_collection_id` int(11) NOT NULL,
   `vinyl_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vinyl_collections_items`
@@ -316,7 +341,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `rating`
