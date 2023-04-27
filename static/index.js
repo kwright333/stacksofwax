@@ -118,10 +118,13 @@ async function createVinylCollection() {
     const collectionNameElement = document.getElementById("collection-name");
     const descriptionElement = document.getElementById("collection-description");
 
+    const csrfToken = document.getElementById(`search-csrf`).value;
+
     const data = {
         collectionName: collectionNameElement.value,
         description: descriptionElement.value,
         vinylIds: selectedVinyls,
+        _csrf: csrfToken
     };
     const response = await fetch(`/api/vinyl-collections`, {
         method: 'POST',
@@ -141,12 +144,14 @@ async function createVinylCollection() {
 async function updateVinylCollection(collectionId) {
     const collectionNameElement = document.getElementById(`collection-name-${collectionId}`);
     const descriptionElement = document.getElementById(`collection-description-${collectionId}`);
-
+    const csrfToken = document.getElementById(`search-csrf`).value;
+    
     const data = {
         collectionName: collectionNameElement.value,
         description: descriptionElement.value,
         vinylIds: selectedVinyls,
-        collectionId
+        collectionId,
+        _csrf: csrfToken
     };
     const response = await fetch(`/api/vinyl-collections`, {
         method: 'PUT',
