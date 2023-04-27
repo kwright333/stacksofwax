@@ -89,10 +89,10 @@
           
           <p>
             <label>Vinyls</label>
-            <select name="vinyl-selection-0" id="vinyl-selection" onchange="addToVinylList(this.value)">
+            <select id="vinyl-selection-0" name="vinyl-selection" onchange="addToVinylList(this.value)">
               <option selected value> -- select an option -- </option>
               <%for (var i = 0; i < vinyls.length; i++) { %> 
-                <option id="vinyl-option-<%= vinyls[i].vinyl_id %>" value='{ "vinylId": "<%= vinyls[i].vinyl_id %>", "album": "<%= vinyls[i].album %>", "collectionId": "0"}'><%= vinyls[i].album %></option>
+                <option id="vinyl-option-<%= vinyls[i].vinyl_id %>-0" value='{ "vinylId": "<%= vinyls[i].vinyl_id %>", "album": "<%= vinyls[i].album %>", "collectionId": "0"}'><%= vinyls[i].album %></option>
               <% } %>
             </select>
           </p>

@@ -78,19 +78,19 @@ function addToVinylList(value) {
 
     console.log(vinylId);
     const vinylList = document.getElementById(`vinyl-list-${collectionId}`);
-    vinylList.innerHTML += `<li data-vinyl-id="${vinylId}" data-album="${album}" id="vinyl-selected-${vinylId}">${album} <i onclick="removeFromVinylList('${vinylId}', '${collectionId}')" class="fa fa-thin fa-delete-left" style="color: #40454f;"></i></li>`
+    vinylList.innerHTML += `<li data-vinyl-id="${vinylId}" data-album="${album}" id="vinyl-selected-${vinylId}-${collectionId}">${album} <i onclick="removeFromVinylList('${vinylId}', '${collectionId}')" class="fa fa-thin fa-delete-left" style="color: #40454f;"></i></li>`
 
-    const vinylOption = document.getElementById(`vinyl-option-${vinylId}`);
-    selectedVinylsHtml[`vinyl-option-${vinylId}`] = vinylOption.outerHTML;
+    const vinylOption = document.getElementById(`vinyl-option-${vinylId}-${collectionId}`);
+    selectedVinylsHtml[`vinyl-option-${vinylId}-${collectionId}`] = vinylOption.outerHTML;
     selectedVinyls.push(vinylId);
     vinylOption.remove();
 }
 
 function removeFromVinylList(vinylId, collectionId) {
-    document.getElementById(`vinyl-selected-${vinylId}`).remove();
+    document.getElementById(`vinyl-selected-${vinylId}-${collectionId}`).remove();
     const vinylSelection = document.getElementById(`vinyl-selection-${collectionId}`);
-    vinylSelection.innerHTML += selectedVinylsHtml[`vinyl-option-${vinylId}`];
-    delete selectedVinylsHtml[`vinyl-option-${vinylId}`];
+    vinylSelection.innerHTML += selectedVinylsHtml[`vinyl-option-${vinylId}-${collectionId}`];
+    delete selectedVinylsHtml[`vinyl-option-${vinylId}-${collectionId}`];
     const index = selectedVinyls.indexOf(vinylId);
     selectedVinyls.splice(index, 1);
 }
