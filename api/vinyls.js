@@ -22,7 +22,7 @@ exports.getVinylPage = async function (req, res) {
 
     let memberId = helper.getMemberId(req);
     
-    res.render("vinyls.ejs", { vinyls, memberId, filtering: false } )
+    res.render("vinyls.ejs", { vinyls, memberId, filtering: false, loggedIn: req.session.loggedIn } )
 }
 
 exports.getAllVinyls = async function (req, res) {
