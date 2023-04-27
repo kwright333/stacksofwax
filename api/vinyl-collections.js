@@ -49,7 +49,17 @@ exports.createVinylCollectionComment = async function (req, res) {
     let memberId = helper.getMemberId(req);
 
     const results = await db.executeQuery(`INSERT INTO comments VALUES (null, ${mysql.escape(req.body.comment)}, ${memberId}, ${req.body.vinylCollectionId})`);
-    res.send(results);
+    const collectionComments = await db.executeQuery(`SELECT comment_id, comment, first_name, last_name, vinyl_collection_id FROM comments JOIN members ON members.member_id = comments.member_id WHERE comment_id = ${results.insertId}`);
+
+    const content = await ejs.renderFile('views/components/comment.ejs', {  
+        comment: {
+            comment: collectionComments[0].comment,
+            comment_id: collectionComments[0].comment_id,
+            first_name: collectionComments[0].first_name,
+            last_name: collectionComments[0].last_name
+        }
+    });
+    res.send(content);
 }
 
 exports.getVinylCollectionComments = async function (req, res) {
@@ -81,7 +91,7 @@ exports.likeVinylCollection = async function (req, res) {
     }
 
     let memberId = helper.getMemberId(req);
-    
+
     const result = await db.executeQuery(`UPDATE vinyl_collection SET like_count = like_count + 1 WHERE vinyl_collection_id = ${req.params.id}`);
     const result1 = await db.executeQuery(`INSERT INTO rating VALUES (null, ${memberId}, null, ${req.params.id})`);
     res.send({
@@ -98,8 +108,8 @@ exports.renderVinylCollectionsPage = async function (req, res) {
     }
 
     const vinyls = await db.executeQuery(`SELECT vinyl_id, album, album_art FROM vinyl`);
-    
-    const vinylCollectionsPromises = await vinylCollectionsResults.map(async function(vinylCollection) {
+
+    const vinylCollectionsPromises = await vinylCollectionsResults.map(async function (vinylCollection) {
         const vinylListResults = await db.executeQuery(`SELECT vinyl_id FROM vinyl_collections_items WHERE vinyl_collection_id = ${vinylCollection.vinyl_collection_id}`);
         const collectionComments = await db.executeQuery(`SELECT comment_id, comment, first_name, last_name, vinyl_collection_id FROM comments JOIN members ON members.member_id = comments.member_id WHERE vinyl_collection_id = ${vinylCollection.vinyl_collection_id}`);
 
@@ -117,8 +127,8 @@ exports.renderVinylCollectionsPage = async function (req, res) {
     } else {
         req.session.loggedIn = false;
     }
-    
-    res.render("collections.ejs", { vinylCollections, memberId, showEdit: false, vinyls, loggedIn: req.session.loggedIn } );
+
+    res.render("collections.ejs", { vinylCollections, memberId, showEdit: false, vinyls, loggedIn: req.session.loggedIn });
 }
 
 exports.renderVinylCollectionsForMember = async function (req, res) {
@@ -127,6 +137,6 @@ exports.renderVinylCollectionsForMember = async function (req, res) {
     let memberId = helper.getMemberId(req);
 
     await ejs.renderFile('views/member-vinyl-collections.ejs', { vinylCollections });
-    
-    res.render("collections.ejs", { vinylCollections, memberId } );
+
+    res.render("collections.ejs", { vinylCollections, memberId });
 }

@@ -15,7 +15,7 @@ async function likeVinyl(id) {
 
     const element = document.getElementById(`like-count-${id}`);
 
-    const newLikeCount = parseInt(element.innerHTML.trim()) +1;
+    const newLikeCount = parseInt(element.innerHTML.trim()) + 1;
 
     element.innerHTML = `${newLikeCount}`;
 }
@@ -37,7 +37,7 @@ async function likeVinylCollection(id) {
 
     const element = document.getElementById(`like-count-${id}`);
 
-    const newLikeCount = parseInt(element.innerHTML.split(':')[1].trim()) +1 
+    const newLikeCount = parseInt(element.innerHTML.split(':')[1].trim()) + 1
 
     element.innerHTML = `Likes: ${newLikeCount}`;
 }
@@ -165,10 +165,12 @@ async function updateVinylCollection(collectionId) {
 
 async function addComment(collectionId) {
     const commentInput = document.getElementById(`collection-comment-input-${collectionId}`);
+    const csrfToken = document.getElementById(`search-csrf`).value;
 
     const data = {
         vinylCollectionId: collectionId,
         comment: commentInput.value,
+        _csrf: csrfToken
     };
     const response = await fetch(`/api/vinyl-collections/${collectionId}/comment`, {
         method: 'POST',
@@ -179,9 +181,14 @@ async function addComment(collectionId) {
     });
 
     if (response.status == 200) {
+        const comments = document.getElementById(`comments-list-${collectionId}`);
+        const newComment = await response.text();
+
+        comments.innerHTML += newComment
+
         commentInput.text = '';
     }
-} 
+}
 
 async function search() {
     const searchInput = document.getElementById(`search-input`);
