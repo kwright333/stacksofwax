@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 27, 2023 at 07:25 PM
+-- Generation Time: Apr 27, 2023 at 09:44 PM
 -- Server version: 10.6.12-MariaDB-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.11
 
@@ -18,11 +18,11 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `stacks_of_wax`
+-- Database: `40079955`
 --
-DROP DATABASE IF EXISTS `stacks_of_wax`;
-CREATE DATABASE IF NOT EXISTS `stacks_of_wax` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `stacks_of_wax`;
+DROP DATABASE IF EXISTS `40079955`;
+CREATE DATABASE IF NOT EXISTS `40079955` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `40079955`;
 
 -- --------------------------------------------------------
 
@@ -43,7 +43,25 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`comment_id`, `comment`, `member_id`, `vinyl_collection_id`) VALUES
 (1, 'Great collection', 3, 19),
-(2, 'Love this!', 2, 19);
+(2, 'Love this!', 2, 19),
+(3, 'Test', 10, 20),
+(4, 'Test', 10, 20),
+(5, 'Test', 10, 20),
+(6, 'Test', 10, 20),
+(7, 'Test', 10, 20),
+(8, 'Test', 10, 20),
+(9, 'Test', 10, 20),
+(10, 'Test', 10, 20),
+(11, 'Test', 10, 20),
+(12, 'Test', 10, 20),
+(13, 'Test', 10, 20),
+(14, 'Test', 10, 20),
+(15, 'Test', 10, 20),
+(16, 'Test', 10, 20),
+(17, 'Test', 10, 19),
+(18, 'Test', 10, 19),
+(19, 'Test2', 10, 19),
+(20, 'Test3', 10, 19);
 
 -- --------------------------------------------------------
 
@@ -86,6 +104,23 @@ CREATE TABLE `rating` (
   `vinyl_collection_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `rating`
+--
+
+INSERT INTO `rating` (`rating_id`, `member_id`, `vinyl_id`, `vinyl_collection_id`) VALUES
+(19, 10, NULL, 20),
+(20, 10, NULL, 20),
+(21, 10, NULL, 20),
+(22, 10, NULL, 22),
+(23, 10, NULL, 22),
+(24, 10, NULL, 22),
+(25, 10, 5, NULL),
+(26, 10, 5, NULL),
+(27, 10, 5, NULL),
+(28, 10, 5, NULL),
+(29, 10, 5, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -108,8 +143,9 @@ INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
 ('BAq_aG-IvNEj58QTAOshwzL6gXbG3abQ', 1682629915, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"loggedIn\":true,\"memberId\":3}'),
 ('qXcLPUpaKNAE9NjMqPoacDs8H4qtzade', 1682704745, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":10,\"email\":\"sean@hotmail.co.uk\"}},\"csrfSecret\":\"cbaJCcleBvMQPDznuPhsaSsi\",\"messages\":[],\"loggedIn\":true}'),
 ('RrvTCam0ssk5hPWB8Gd0BVJ29Qburr1f', 1682704709, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":10,\"email\":\"sean@hotmail.co.uk\"}},\"csrfSecret\":\"K72gvNyfHftt2zmPLb--kWNG\",\"messages\":[],\"loggedIn\":true}'),
-('vpUXdVoG3XxP-_WY74AzPECTBT3jFot7', 1682706161, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":10,\"email\":\"sean@hotmail.co.uk\"}},\"csrfSecret\":\"ij9eHYCfSbRMjLiRAIBDhHmW\",\"messages\":[],\"loggedIn\":true}'),
+('vpUXdVoG3XxP-_WY74AzPECTBT3jFot7', 1682707173, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":10,\"email\":\"sean@hotmail.co.uk\"}},\"csrfSecret\":\"ij9eHYCfSbRMjLiRAIBDhHmW\",\"messages\":[],\"loggedIn\":true}'),
 ('XqYpPu9sNwMwWzDI_MDnT08kmLJFoSPc', 1682705099, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":10,\"email\":\"sean@hotmail.co.uk\"}},\"csrfSecret\":\"lqgC_9XYm8qE7kv2tK1mDBqz\",\"messages\":[]}'),
+('YZ4SHKUCS0HL1q3xmVgUHZVr1BGNBb3r', 1682714644, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":10,\"email\":\"sean@hotmail.co.uk\"}},\"csrfSecret\":\"uLhCj6MdMRF1v-E47XM1_1bV\",\"messages\":[],\"loggedIn\":true}'),
 ('ZIbm6FFT2Msu2ilIeMmInUvWSZYSG8TI', 1682703885, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"passport\":{\"user\":{\"id\":10,\"email\":\"sean@hotmail.co.uk\"}},\"csrfSecret\":\"ySwhTLgZSlQFqQc3oReYBcFY\",\"messages\":[]}');
 
 -- --------------------------------------------------------
@@ -152,7 +188,7 @@ CREATE TABLE `vinyl` (
 --
 
 INSERT INTO `vinyl` (`vinyl_id`, `album`, `artist`, `year`, `genre`, `record_company`, `tracklist`, `like_count`, `album_art`) VALUES
-(5, 'Dark Side of the Moon', 'Pink Floyd', 1973, 'Progressive Rock', 'Harvest', '[\"Harvest\",\"Capitol\",\"Speak to Me\",\"Breathe\",\"On the Run\",\"Time\",\"The Great Gig in the Sky\",\"Money\",\"Us and Them\",\"Any Colour You Like\",\"Brain Damage\",\"Eclipse\"]', 15, 'https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png'),
+(5, 'Dark Side of the Moon', 'Pink Floyd', 1973, 'Progressive Rock', 'Harvest', '[\"Harvest\",\"Capitol\",\"Speak to Me\",\"Breathe\",\"On the Run\",\"Time\",\"The Great Gig in the Sky\",\"Money\",\"Us and Them\",\"Any Colour You Like\",\"Brain Damage\",\"Eclipse\"]', 20, 'https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png'),
 (6, 'Rumours', 'Fleetwood Mac', 1977, 'Pop Rock', 'Warner Bros.', '[\"Warner Bros.\",\"Second Hand News\",\"Dreams\",\"Never Going Back Again\",\"Don\'t Stop\",\"Go Your Own Way\",\"Songbird\",\"The Chain\",\"You Make Loving Fun\",\"I Don\'t Want to Know\",\"Oh Daddy\",\"Gold Dust Woman\"]', 10, 'https://upload.wikimedia.org/wikipedia/en/f/fb/FMacRumours.PNG'),
 (7, 'Born to Run', 'Bruce Springsteen', 1975, 'Rock', 'Columbia', '[\"Columbia\",\"Thunder Road\",\"Tenth Avenue Freeze-Out\",\"Night\",\"Backstreets\",\"Born to Run\",\"She\'s the One\",\"Meeting Across the River\",\"Jungleland\"]', 0, 'https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Born_to_Run_%28Front_Cover%29.jpg/220px-Born_to_Run_%28Front_Cover%29.jpg'),
 (8, 'Hotel California', 'The Eagles', 1976, 'Rock', 'Asylum', '[\"Asylum\",\"Hotel California\",\"New Kid in Town\",\"Life in the Fast Lane\",\"Wasted Time\",\"Wasted Time (Reprise)\",\"Victim of Love\",\"Pretty Maids All in a Row\",\"Try and Love Again\",\"The Last Resort\"]', 0, 'https://upload.wikimedia.org/wikipedia/en/4/49/Hotelcalifornia.jpg'),
@@ -235,9 +271,11 @@ CREATE TABLE `vinyl_collection` (
 
 INSERT INTO `vinyl_collection` (`vinyl_collection_id`, `member_id`, `vinyl_collection_name`, `description`, `like_count`) VALUES
 (19, 10, 'Rock Collection', 'All my rock albums', 10),
-(20, 10, 'Chill Music', 'More relaxed music', 3),
+(20, 10, 'Chill Music', 'More relaxed music', 6),
 (21, 2, 'My collection', 'Just all the albums I own', 1),
-(22, 3, 'Mood Music', 'Music to make you feel good', 0);
+(22, 3, 'Mood Music', 'Music to make you feel good', 3),
+(23, 10, 'Test 1', 'asdasd', 0),
+(24, 10, 'Sean', 'asdasd', 0);
 
 -- --------------------------------------------------------
 
@@ -272,7 +310,11 @@ INSERT INTO `vinyl_collections_items` (`vinyl_collection_id`, `vinyl_id`) VALUES
 (22, 5),
 (22, 12),
 (22, 16),
-(22, 51);
+(22, 51),
+(23, 5),
+(23, 9),
+(24, 6),
+(24, 7);
 
 --
 -- Indexes for dumped tables
@@ -335,7 +377,7 @@ ALTER TABLE `vinyl_collections_items`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `members`
@@ -347,7 +389,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `vinyl`
@@ -359,13 +401,13 @@ ALTER TABLE `vinyl`
 -- AUTO_INCREMENT for table `vinyl_collection`
 --
 ALTER TABLE `vinyl_collection`
-  MODIFY `vinyl_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `vinyl_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `vinyl_collections_items`
 --
 ALTER TABLE `vinyl_collections_items`
-  MODIFY `vinyl_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `vinyl_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables

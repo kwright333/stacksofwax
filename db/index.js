@@ -5,7 +5,7 @@ const MySQLStore = require('express-mysql-session')(session);
 const connectionOptions = {
     host: 'localhost',
     user: 'root',
-    database: 'stacks_of_wax',
+    database: '40079955',
     port: 3306,
     charset: 'utf8mb4'
 };
