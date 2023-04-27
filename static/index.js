@@ -1,6 +1,8 @@
 async function likeVinyl(id) {
+    const csrfToken = document.getElementById(`search-csrf`).value;
+
     const data = {
-        memberId: 1
+        _csrf: csrfToken
     };
 
     await fetch(`/api/vinyls/${id}/like`, {
@@ -10,6 +12,12 @@ async function likeVinyl(id) {
         },
         body: JSON.stringify(data),
     });
+
+    const element = document.getElementById(`like-count-${id}`);
+
+    const newLikeCount = parseInt(element.innerHTML.trim()) +1;
+
+    element.innerHTML = `${newLikeCount}`;
 }
 
 async function likeVinylCollection(id) {

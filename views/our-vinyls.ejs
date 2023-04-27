@@ -1,91 +1,74 @@
 <div class="team-grid" id="vinyls-list">
-    <div class="container">
-      <div class="row albums d-flex justify-content-center">
-        <%for (var i = 0; i < vinyls.length; i++) { %> 
-          <% let vinylName = vinyls[i].album %> 
-          <% let artist = vinyls[i].artist %> 
-          <% let art = vinyls[i].album_art %>
-          <% let modalNum = vinyls[i].vinyl_id %>
-          <% let tracklist = vinyls[i].tracklist %>
-          <% let genre = vinyls[i].genre %>
-          <% let year = vinyls[i].year %>
-          <% let recordCompany = vinyls[i].record_company %>
-          <% let likeCount = vinyls[i].like_count %>
-        <div class="col-md-4 col-lg-3 item">
-          <div class="box" style="background-image: url(<%= art %>)">
-            <a
-              href="#!"
-              data-bs-toggle="modal"
-              data-bs-target="#<%= modalNum %>"
-              onclick="showAlbumModal"
-            >
-              <div class="cover">
-                <h4 class="album"><%= vinylName %></h4>
-                <p class="artist"><%= artist %></p>
-              </div>
-            </a>
-          </div>
+  <div class="container">
+    <div class="row albums d-flex justify-content-center">
+      <% for (var i = 0; i < vinyls.length; i++) { %>
+      <% let vinylName = vinyls[i].album %>
+      <% let artist = vinyls[i].artist %>
+      <% let art = vinyls[i].album_art %>
+      <% let modalNum = vinyls[i].vinyl_id %>
+      <% let tracklist = vinyls[i].tracklist %>
+      <% let genre = vinyls[i].genre %>
+      <% let year = vinyls[i].year %>
+      <% let recordCompany = vinyls[i].record_company %>
+      <% let likeCount = vinyls[i].like_count %>
+      <div class="col-md-4 col-lg-3 item">
+        <div class="box" style="background-image: url(<%= art %>)">
+          <a href="#!" data-bs-toggle="modal" data-bs-target="#<%= modalNum %>" onclick="showAlbumModal">
+            <div class="cover">
+              <h4 class="album"><%= vinylName %></h4>
+              <p class="artist"><%= artist %></p>
+            </div>
+          </a>
         </div>
+      </div>
 
-        <!-- Modal -->
-        <div
-          class="modal fade"
-          id="<%= modalNum %>"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                  <%= vinylName %>
-                </h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                 <p>
-                  <h5>Track List</h5>
-                  <ul>
-                  <%= tracklist %>
-                  </ul>
-                 </p> 
-                 <p>
-                  <h5>Year</h5>
-                  <%= year %>
-                 </p>
-                 <p>
-                  <h5>Genre</h5>
-                  <%= genre %>
-                 </p>
-                 <p>
-                  <h5>Record Company</h5>
-                  <%= recordCompany %>
-                 </p>
-                 <p>
-                  <h5>Likes</h5>
-                  <%= likeCount %>
-                 </p>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button class="btn btn-block btn-primary" onclick="likeVinyl(<%= vinyls[i].vinyl_id %>)"><i class="fa fa-thumbs-up"></i> Like</button>
-              </div>
+      <!-- Modal -->
+      <div class="modal fade" id="<%= modalNum %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                <%= vinylName %>
+              </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>
+              <h5>Track List</h5>
+              <ul>
+                <%= tracklist %>
+              </ul>
+              </p>
+              <p>
+              <h5>Year</h5>
+              <%= year %>
+              </p>
+              <p>
+              <h5>Genre</h5>
+              <%= genre %>
+              </p>
+              <p>
+              <h5>Record Company</h5>
+              <%= recordCompany %>
+              </p>
+              <p >
+                <h5>Likes</h5>
+                <p id="like-count-<%= vinyls[i].vinyl_id %>"> <%= likeCount %></p>
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Close
+              </button>
+
+              <% if (loggedIn) { %>
+              <button class="btn btn-block btn-primary" onclick="likeVinyl(<%= vinyls[i].vinyl_id %>)"><i class="fa fa-thumbs-up"></i> Like</button>
+              <% } %>
             </div>
           </div>
         </div>
-        <% } %>
       </div>
+      <% } %>
     </div>
   </div>
+</div>

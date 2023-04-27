@@ -8,8 +8,13 @@ exports.getVinylsPage = async function (req, res) {
     const artists = await db.executeQuery(`SELECT DISTINCT artist FROM vinyl`);
 
     let memberId = helper.getMemberId(req);
+    if (memberId) {
+        req.session.loggedIn = true;
+    } else {
+        req.session.loggedIn = false;
+    }
     
-    res.render("vinyls.ejs", { vinyls, genres, artists, memberId, filtering: true } )
+    res.render("vinyls.ejs", { vinyls, genres, artists, memberId, filtering: true, loggedIn: req.session.loggedIn } )
 }
 
 exports.getVinylPage = async function (req, res) {
