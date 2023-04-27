@@ -43,28 +43,28 @@ exports.getVinylsByGenre = async function (req, res) {
 exports.renderVinylsByGenre = async function (req, res) {
     const vinyls = await db.executeQuery(`SELECT * FROM vinyl WHERE genre = '${req.params.genre}'`);
 
-    const data = await ejs.renderFile('views/our-vinyls.ejs', { vinyls });
+    const data = await ejs.renderFile('views/our-vinyls.ejs', { vinyls, loggedIn: req.session.loggedIn });
     res.send(data)
 }
 
 exports.renderVinylsByArtist = async function (req, res) {
     const vinyls = await db.executeQuery(`SELECT * FROM vinyl WHERE artist = '${req.params.artist}'`);
 
-    const data = await ejs.renderFile('views/our-vinyls.ejs', { vinyls });
+    const data = await ejs.renderFile('views/our-vinyls.ejs', { vinyls, loggedIn: req.session.loggedIn });
     res.send(data)
 }
 
 exports.renderVinylsByMostLiked = async function (req, res) {
     const vinyls = await db.executeQuery(`SELECT * FROM vinyl ORDER BY like_count DESC`);
 
-    const data = await ejs.renderFile('views/our-vinyls.ejs', { vinyls });
+    const data = await ejs.renderFile('views/our-vinyls.ejs', { vinyls, loggedIn: req.session.loggedIn });
     res.send(data)
 }
 
 exports.renderVinylsByLeastLiked = async function (req, res) {
     const vinyls = await db.executeQuery(`SELECT * FROM vinyl ORDER BY like_count ASC`);
 
-    const data = await ejs.renderFile('views/our-vinyls.ejs', { vinyls });
+    const data = await ejs.renderFile('views/our-vinyls.ejs', { vinyls, loggedIn: req.session.loggedIn });
     res.send(data)
 }
 
